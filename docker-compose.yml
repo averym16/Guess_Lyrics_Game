@@ -23,6 +23,17 @@ services:
     depends_on:
       db:
         condition: service_healthy
+  api:
+  build: ./backend
+  environment:
+    DATABASE_URL: postgresql+psycopg2://lyrics_user:lyrics_pass@db:5432/lyrics
+  ports:
+    - "5000:5000"
+  depends_on:
+    db:
+      condition: service_healthy
+
 
 volumes:
   pgdata:
+
