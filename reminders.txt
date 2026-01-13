@@ -1,0 +1,3 @@
+For testing DB:
+Local machine: postgresql://lyrics_user:lyrics_pass@localhost:5432/lyrics
+Flask Container: postgresql://lyrics_user:lyrics_pass@db:5432/lyrics
