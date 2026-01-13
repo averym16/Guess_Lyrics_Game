@@ -12,15 +12,15 @@
                 <h1 name="home" class="home">Guess The Lyrics</h1>
             </header>
             <section class="game-settings">
-                <label for="artist">Choose An Artist:</label>
-                <select id="artist" name="artist">
-                    <option value="macmiller">Add artists using js here</option>
-                </select>
-                <label for="song">Choose A Song:</label>
-                <select id="song" name="song">
-                    <option value="perfectcirclegodspeed">Add song titles using js here</option>
-                </select>
-                <button>Start</button>
+                <form id="selection">
+                    <label for="artist">Choose An Artist:</label>
+                    <input type="text" id="artist" name="artist" placeholder="Random">
+                    <label for="song">Choose A Song:</label>
+                    <input type="text" id="song" name="song" placeholder="Random">
+                    <button type="submit">Start</button>
+                </form>
+                
+                
 
             </section>
             <section id="game">

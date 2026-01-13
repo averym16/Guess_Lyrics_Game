@@ -1,5 +1,6 @@
 import os
-from flask import Flask, jsonify, send_from_directory
+from flask import Flask, jsonify, send_from_directory, request, render_template
+from sqlalchemy import and_
 from dotenv import load_dotenv
 from models import db, Song
 
@@ -30,4 +31,29 @@ def random_song():
         "artist": song.artist,
         "lyrics": song.lyrics
     })
+
+#POST request recieves user selection from html 
+@app.route('/api/get_song', methods=['POST'])
+def api_get_song():
+    data = request.get_json()
+    artist = data.get('artist', '').strip()
+    song = data.get('song', '').strip()
+
+    if not artist or not song:
+        return jsonify({"error": "Artist and song required"}), 400
+
+    result = Song.query.filter(
+        Song.artist.ilike(artist),
+        Song.title.ilike(song)
+    ).first()
+
+    if not result:
+        return jsonify({"error": "Song not found"}), 404
+
+    return jsonify({
+        "artist": result.artist,
+        "song": result.title,
+        "lyrics": result.lyrics
+    })
+
 
