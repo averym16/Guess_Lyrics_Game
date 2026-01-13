@@ -22,5 +22,6 @@ document.getElementById("selection").addEventListener("submit", async (e) => {
     return;
   }
 
-  document.getElementById("lyrics").textContent = data.lyrics;
+  console.log(data.lyrics);
+
 });
