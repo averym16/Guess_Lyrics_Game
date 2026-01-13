@@ -24,6 +24,6 @@ def random_song():
         "id": song.id,
         "title": song.title,
         "artist": song.artist,
-        "album": song.album
+        "lyrics": song.lyrics
     })
 
