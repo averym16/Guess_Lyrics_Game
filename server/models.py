@@ -8,4 +8,5 @@ class Song(db.Model):
     id = db.Column(db.BigInteger, primary_key=True)
     title = db.Column(db.Text, nullable=False)
     artist = db.Column(db.Text, nullable=False)
-    lyrics = db.Column(db.Text, nullable=False)
+    tokens = db.Column(db.Text, nullable=True)  # JSON string of list[list[str]]
+

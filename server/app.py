@@ -53,7 +53,7 @@ def api_get_song():
     return jsonify({
         "artist": result.artist,
         "song": result.title,
-        "lyrics": result.lyrics
+        "tokens": json.loads(result.tokens) if result.tokens else []
     })
 
 

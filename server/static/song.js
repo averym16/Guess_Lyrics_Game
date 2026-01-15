@@ -25,3 +25,13 @@ document.getElementById("selection").addEventListener("submit", async (e) => {
   console.log(data.lyrics);
 
 });
+
+function checkGuess(value){
+    
+}
+
+const guess = document.getElementById('gameinput');
+
+guess.addEventListener("input", function(event){
+
+});
