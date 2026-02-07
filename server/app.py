@@ -1,6 +1,7 @@
 import os
 from flask import Flask, jsonify, send_from_directory, request, render_template
 from sqlalchemy import and_
+from flask_migrate import Migrate
 from dotenv import load_dotenv
 from models import db, Song
 
@@ -11,6 +12,10 @@ app.config["SQLALCHEMY_DATABASE_URI"] = os.environ["DATABASE_URL"]
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db.init_app(app)
+migrate = Migrate(app, db)
+
+with app.app_context():
+    db.create_all()
 
 @app.get("/")
 def index():
@@ -22,14 +27,13 @@ def health():
 
 @app.get("/api/songs/random")
 def random_song():
-    song = Song.query.order_by(db.func.random()).first()
+    result = song
     if not song:
         return jsonify({"error": "no songs"}), 404
     return jsonify({
-        "id": song.id,
-        "title": song.title,
-        "artist": song.artist,
-        "lyrics": song.lyrics
+        "artist": result.artist,
+        "song": result.title,
+        "lyrics": [l.lyric for l in result.lyrics]
     })
 
 #POST request recieves user selection from html 
@@ -44,7 +48,7 @@ def api_get_song():
 
     result = Song.query.filter(
         Song.artist.ilike(artist),
-        Song.title.ilike(song)
+        Song.title.ilike(title)
     ).first()
 
     if not result:
@@ -52,8 +56,8 @@ def api_get_song():
 
     return jsonify({
         "artist": result.artist,
-        "song": result.title,
-        "tokens": json.loads(result.tokens) if result.tokens else []
+        "song": result.song,
+        "lyrics": [l.lyric for l in result.lyrics]
     })
 
 
