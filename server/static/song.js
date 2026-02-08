@@ -24,7 +24,8 @@ document.getElementById("selection").addEventListener("submit", async (e) => {
   const artist = document.getElementById("artist").value.trim();
   const song = document.getElementById("song").value.trim();
 
-  data = getSong(artist, song)
+  console.log(artist, song);
+  data = await getSong(artist, song);
   
   console.log(data.lyrics);
 
