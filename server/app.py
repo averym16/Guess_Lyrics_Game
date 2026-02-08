@@ -36,7 +36,7 @@ def random_song():
         "lyrics": [l.lyric for l in result.lyrics]
     })
 
-#POST request recieves user selection from html 
+#POST request receives user selection from html 
 @app.route('/api/get_song', methods=['POST'])
 def api_get_song():
     data = request.get_json()
@@ -48,7 +48,7 @@ def api_get_song():
 
     result = Song.query.filter(
         Song.artist.ilike(artist),
-        Song.title.ilike(title)
+        Song.title.ilike(song)  # Changed from 'title' to 'song'
     ).first()
 
     if not result:
@@ -56,10 +56,9 @@ def api_get_song():
 
     return jsonify({
         "artist": result.artist,
-        "song": result.song,
-        "lyrics": [l.lyric for l in result.lyrics]
+        "song": result.title,  # Changed from result.song to result.title
+        "lyrics": [lyric.lyric for lyric in result.lyrics]
     })
-
 
 if __name__ == "__main__":
     app.run(debug=True)
