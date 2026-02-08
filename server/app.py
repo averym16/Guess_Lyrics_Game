@@ -19,7 +19,7 @@ with app.app_context():
 
 @app.get("/")
 def index():
-    return send_from_directory(app.static_folder, "index.html")
+    return render_template("index.html")
 
 @app.get("/api/health")
 def health():
@@ -61,4 +61,4 @@ def api_get_song():
     })
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
