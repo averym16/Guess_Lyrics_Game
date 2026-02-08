@@ -28,10 +28,12 @@ services:
     build: ./server
     environment:
       DATABASE_URL: ${DATABASE_URL}
+      FLASK_ENV: development
+      FLASK_DEBUG: "1"
     ports:
       - "5000:5000"
     volumes:
-      - ./server:/app  # ADD THIS LINE - mounts your server folder to /app
+      - ./server:/app
     depends_on:
       db:
         condition: service_healthy

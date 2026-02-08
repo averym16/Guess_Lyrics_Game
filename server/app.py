@@ -22,7 +22,7 @@ def index():
     return render_template("index.html")
 @app.get("/guess")  
 def guess_lyrics():
-    return render_template("guess_lyrics.html")
+    return render_template("lyric_game.html")
 
 @app.get("/api/health")
 def health():
