@@ -20,6 +20,9 @@ with app.app_context():
 @app.get("/")
 def index():
     return render_template("index.html")
+@app.get("/guess")  
+def guess_lyrics():
+    return render_template("guess_lyrics.html")
 
 @app.get("/api/health")
 def health():
