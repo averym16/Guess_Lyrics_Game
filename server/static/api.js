@@ -19,8 +19,11 @@ export async function getSong(artist, song) {
             const error = await response.json();
             throw new Error(error.error || 'Failed to fetch song');
         }
+        const data = await response.json();  // Parse JSON first
+        console.log('Song data:', data);      // Now log the actual data
+        console.log('Lyrics:', data.lyrics);  // Log lyrics array
+        return data;                          // Return the parsed data
         
-        return await response.json();
     } catch (error) {
         console.error('Error fetching song:', error);
         throw error;
@@ -41,18 +44,3 @@ export async function getRandomSong() {
         throw error;
     }
 }
-
-//Serve lyrics once user selects songs & artist
-document.getElementById("selection").addEventListener("submit", async (e) => {
-  e.preventDefault(); // stop normal form submit
-
-  const artist = document.getElementById("artist").value.trim();
-  const song = document.getElementById("song").value.trim();
-
-  console.log(artist, song);
-  data = await getSong(artist, song);
-  
-  console.log(data.lyrics);
-
-});
-
