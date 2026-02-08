@@ -20,7 +20,7 @@ class Song(db.Model):
 class Lyric(db.Model):
     __tablename__ = "lyrics"
 
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, auto_increment=True)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     song_id: Mapped[int] = mapped_column(Integer, ForeignKey("songs.id"), nullable=False)
     lyric: Mapped[str] = mapped_column(String, nullable=False)
 

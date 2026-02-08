@@ -27,7 +27,7 @@ services:
   api:
     build: ./server
     environment:
-      DATABASE_URL: postgresql+psycopg2://lyrics_user:lyrics_pass@db:5432/lyrics
+      DATABASE_URL: ${DATABASE_URL}
     ports:
       - "5000:5000"
     depends_on:
