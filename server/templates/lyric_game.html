@@ -1,38 +1,55 @@
 <!DOCTYPE html>
-<html lang = "en">
+<html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width", initial-scale="1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Guess The Lyrics | Lyric Game</title>
     </head>
     <body>
-        <nav id ="navbar"></nav>
+        <nav id="navbar"></nav>
         <main>
             <header>
                 <h1 name="home" class="home">Guess The Lyrics</h1>
             </header>
+            
             <section class="game-settings">
                 <form id="selection">
                     <label for="artist">Choose An Artist:</label>
                     <input type="text" id="artist" name="artist" placeholder="Random">
+                    
                     <label for="song">Choose A Song:</label>
                     <input type="text" id="song" name="song" placeholder="Random">
-                    <button type="submit">Start</button>
                 </form>
                 
-            <pre id="lyrics"></pre>
-
-
-
+                <label for="timer">Set Timer:</label>
+                <div class="timer-container">
+                    <label>Minutes: <input type="number" id="minutesInput" min="0" value="0"></label>
+                    <label>Seconds: <input type="number" id="secondsInput" min="0" max="59" value="0"></label>
+                </div>
+            
+                <button type="submit" id="startBtn">Start</button>
+                <button id="pauseBtn">Pause</button>
+                <button id="stopBtn">Stop</button>
             </section>
-            <section id="game">
-                <label id="answer">Type Lyrics Below:</label>
-                <input type="text" id="gameinput" class="answerEntry" placeholder="Type Here..." autocapitalize="off" 
-                spellcheck="true" autocomplete="off" autocorrect="off">
+            
+            <section id="game" style="display: none;">
+                <div id="display">00:00</div>
                 
+                <label id="answer">Type Lyrics Below:</label>
+                <input type="text" id="gameinput" class="answerEntry" 
+                       placeholder="Type Here..." 
+                       autocapitalize="off" 
+                       spellcheck="false" 
+                       autocomplete="off" 
+                       autocorrect="off">
             </section>
-            <script src="/static/song.js"></script>            
+            <section class="lyrics">
+                <table class="lyrics-table">
+                </table>
+            </section>
         </main>
+        
         <footer class="footer"></footer>
+        <script type="module" src="/static/js/game_logic.js"></script>
     </body>
 </html>
