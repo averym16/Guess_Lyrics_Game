@@ -31,15 +31,15 @@ def health():
 #Pull random song from database if user selects none
 @app.get("/api/songs/random")
 def random_song():
-    song = Song.select(func.random()).first()
+    song = Song.query.order_by(func.random()).first()
 
     if not song:
         return jsonify({"error": "No songs found"}), 404
 
     return jsonify({
-        "artist": result.artist,
-        "song": result.title,
-        "lyrics": [lyric.lyric for lyric in result.lyrics]
+        "artist": song.artist,
+        "song": song.title,
+        "lyrics": [lyric.lyric for lyric in song.lyrics]
     })
 
 @app.get("/api/library")

@@ -3,14 +3,31 @@ from app import app
 import re
 from models import db, Song, Lyric
 
-def valid(word):
-    word.strip()
-    for char in word:
-        if char == '-':
-            char = ' '
-        elif char.isalnum() == False:
-            char = ''
-    return word
+def valid(words):
+    """
+    Process a list of words:
+    - Split words containing hyphens into separate words
+    - Remove all non-alphanumeric characters from each word
+    - Return cleaned list of words
+    """
+    result = []
+    
+    for word in words:
+        if '-' in word:
+            # Split on hyphens and add each part separately
+            parts = word.split('-')
+            for part in parts:
+                # Clean each part and add if not empty
+                cleaned = ''.join(char for char in part if char.isalnum())
+                if cleaned:
+                    result.append(cleaned)
+        else:
+            # Clean the word and add if not empty
+            cleaned = ''.join(char for char in word if char.isalnum())
+            if cleaned:
+                result.append(cleaned)
+    
+    return result
 def seed():
 
     with open("data.json") as f:
@@ -30,11 +47,10 @@ def seed():
             db.session.flush()  # get song.id
 
             words = item["lyrics"].split()
-            for word in words:
-                fixed_word = valid(word)
-
+            valid_words = valid(words)
+            for word in valid_words:
                 db.session.add(
-                    Lyric(song_id=song.id, lyric=fixed_word)
+                    Lyric(song_id=song.id, lyric=word)
                 )
 
         db.session.commit()
