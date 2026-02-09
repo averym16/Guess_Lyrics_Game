@@ -89,6 +89,11 @@ export function setTimerEndCallback(callback) {
     onTimerEnd = callback;
 }
 
+export function displayScore(score, total)
+{
+    document.getElementById('score').innerHTML = score + '/' + total;   
+}
+
 // ==================== THEME ====================
 export function setTheme(theme) {
     document.body.className = theme;

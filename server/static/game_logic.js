@@ -18,7 +18,8 @@ import {
     showGameSection,
     hideGameSection,
     revealHiddenLyrics,
-    buildLibrary
+    buildLibrary,
+    displayScore
 } from './components.js';
 
 // ==================== GAME STATE ====================
@@ -88,6 +89,7 @@ async function handleGameStart(e) {
         buildTable(currentLyrics);
         renderLyrics(guessedWords);
         showGameSection();
+        displayScore(0, totalWords);
         
         // Start timer
         if (!startTimer()) {
@@ -143,6 +145,7 @@ function checkGuess(guess) {
                 guessedWords.add(cleanWord);
                 foundMatch = true;
                 score++;
+                displayScore(score, totalWords);
             }
             else if (word == guess && !guessedWords.has(word))
             {
