@@ -3,6 +3,11 @@ from app import app
 from models import db, Song, Lyric
 
 def seed():
+
+    if Song.query.count() > 0:
+            print("Database already seeded, skipping...")
+            return
+            
     with open("data.json") as f:
         data = json.load(f)
 

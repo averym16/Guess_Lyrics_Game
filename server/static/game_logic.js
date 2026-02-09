@@ -5,7 +5,7 @@ This file handles game state and logic:
 - Coordinates between API calls and UI updates
 */
 
-import { getSong, getRandomSong } from './api.js';
+import { getSong, getRandomSong, getSongLibrary } from './api.js';
 import { 
     initComponents,
     startTimer,
@@ -26,9 +26,12 @@ let currentLyrics = [];
 let guessedWords = new Set();
 let score = 0;
 let totalWords = 0;
+let library = {};
 
 // ==================== INITIALIZATION ====================
-function initGame() {
+async function initGame() {
+    library = await getSongLibrary();
+    console.log(library.json());
     // Initialize UI components
     initComponents();
     
@@ -39,7 +42,6 @@ function initGame() {
     const pauseBtn = document.getElementById('pauseBtn');
     const stopBtn = document.getElementById('stopBtn');
     const resetBtn = document.getElementById('resetBtn');
-    
     // Form submission starts the game
     form.addEventListener('submit', handleGameStart);
     
@@ -236,4 +238,4 @@ function resetGame() {
 
 // ==================== START THE GAME ====================
 document.addEventListener('DOMContentLoaded', initGame);
-document.addEventListener('input', handleGuessInput)
+document.addEventListener('input', handleGuessInput);

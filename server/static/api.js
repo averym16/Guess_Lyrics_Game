@@ -40,3 +40,17 @@ export async function getRandomSong() {
         throw error;
     }
 }
+
+export async function getSongLibrary() {
+    try {
+        const response = await fetch('/api/library');
+        
+        if (!response.ok) {
+            throw new Error('Failed to fetch songs');
+        }
+        return response.json();
+    } catch (error) {
+        console.error('Error fetching songs', error);
+        throw error;
+    }
+}
