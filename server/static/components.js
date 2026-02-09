@@ -34,8 +34,7 @@ export function startTimer() {
     timeLeft = (minutes * 60) + seconds;
     
     if (timeLeft <= 0) {
-        alert('Please set a timer duration');
-        return;
+        return false;
     }
     
     countdown = setInterval(() => {
@@ -57,6 +56,8 @@ export function startTimer() {
             timeLeft--;
         }
     }, 1000);
+
+    return true;
 }
 
 export function pauseTimer() {

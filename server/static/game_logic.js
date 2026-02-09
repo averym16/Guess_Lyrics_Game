@@ -90,7 +90,12 @@ async function handleGameStart(e) {
         showGameSection();
         
         // Start timer
-        startTimer();
+        if (!startTimer()) {
+            alert('Please set a timer duration');
+            
+            resetGame();
+            return;
+        }
         
         // Focus on guess input
         document.getElementById('gameinput').focus();
