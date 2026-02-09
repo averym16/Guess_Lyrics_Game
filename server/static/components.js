@@ -15,6 +15,7 @@ export function initTimer() {
     const startBtn = document.getElementById('startBtn');
     const pauseBtn = document.getElementById('pauseBtn');
     const stopBtn = document.getElementById('stopBtn');
+    const resetBtn = document.getElementById('resetBtn');
     
     // Note: These are separate from game start
     // You'll trigger startTimer from game_logic.js when game actually starts
@@ -136,6 +137,22 @@ export function renderLyrics(guessedWords) {
         cell.textContent = guessedWords.has(cleanWord)
             ? cell.dataset.word
             : '______';
+    });
+}
+
+export function revealHiddenLyrics(guessedWords)
+{
+    const cells = document.querySelectorAll('#lyrics-table td');
+
+    cells.forEach(cell => {
+        const cleanWord = cell.dataset.word
+            .toLowerCase()
+            .replace(/[^a-z]/g, '');
+
+        if ( !guessedWords.has(cleanWord) ){
+            cell.textContent = cell.dataset.word;
+            cell.style.color = 'red';
+        }
     });
 }
 

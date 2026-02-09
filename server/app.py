@@ -28,15 +28,18 @@ def guess_lyrics():
 def health():
     return {"ok": True}
 
+#Pull random song from database if user selects none
 @app.get("/api/songs/random")
 def random_song():
-    result = song
+    song = Song.query.order_by(func.random()).first()
+
     if not song:
-        return jsonify({"error": "no songs"}), 404
+        return jsonify({"error": "No songs found"}), 404
+
     return jsonify({
         "artist": result.artist,
         "song": result.title,
-        "lyrics": [l.lyric for l in result.lyrics]
+        "lyrics": [lyric.lyric for lyric in result.lyrics]
     })
 
 #POST request receives user selection from html 
@@ -51,7 +54,7 @@ def api_get_song():
 
     result = Song.query.filter(
         Song.artist.ilike(artist),
-        Song.title.ilike(song)  # Changed from 'title' to 'song'
+        Song.title.ilike(song)
     ).first()
 
     if not result:
