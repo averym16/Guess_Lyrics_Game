@@ -7,7 +7,9 @@ db = SQLAlchemy()
 
 class Song(db.Model):
     __tablename__ = "songs"
-
+    __table_args__ = (
+        db.UniqueConstraint('title', 'artist', name='unique_song'),
+    )
     id: Mapped[Integer] = mapped_column(Integer, primary_key=True, autoincrement=True)
     title: Mapped[str] = mapped_column(String, nullable=False)
     artist: Mapped[String] = mapped_column(String, nullable=False)
@@ -18,7 +20,7 @@ class Song(db.Model):
     def __repr__(self):
         return f"<Song {self.id} - {self.title}>"
 class Lyric(db.Model):
-    __tablename__ = "lyrics"
+    __tablename__ = "lyrics" 
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     song_id: Mapped[int] = mapped_column(Integer, ForeignKey("songs.id"), nullable=False)

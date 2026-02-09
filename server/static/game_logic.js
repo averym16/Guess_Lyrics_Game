@@ -31,7 +31,7 @@ let library = {};
 // ==================== INITIALIZATION ====================
 async function initGame() {
     library = await getSongLibrary();
-    console.log(library.json());
+    console.log(library);
     // Initialize UI components
     initComponents();
     
@@ -130,7 +130,8 @@ function checkGuess(guess) {
     currentLyrics.forEach(lyric => {
         const words = lyric.toLowerCase().split(' ');
         words.forEach(word => {
-            const cleanWord = word.replace(/[^a-z]/g, '');
+            const cleanWord = word.replace(/[^a-z0-9]/g, '');
+            cleanWord.toLowerCase();
             
             if (cleanWord === guess && !guessedWords.has(cleanWord)) {
                 guessedWords.add(cleanWord);
