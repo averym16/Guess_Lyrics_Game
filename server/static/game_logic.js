@@ -14,6 +14,7 @@ import {
     resetTimer,
     setTimerEndCallback,
     renderLyrics,
+    buildTable,
     showGameSection,
     hideGameSection
 } from './components.js';
@@ -78,6 +79,7 @@ async function handleGameStart(e) {
         totalWords = calculateTotalWords(currentLyrics);
         
         // Update UI
+        buildTable(currentLyrics);
         renderLyrics(currentLyrics, guessedWords);
         showGameSection();
         

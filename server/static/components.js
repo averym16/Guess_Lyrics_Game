@@ -125,22 +125,50 @@ export function loadFooter() {
 }
 
 // ==================== LYRICS DISPLAY ====================
-export function renderLyrics(lyrics, guessedWords) {
-    const lyricsContainer = document.getElementById('lyrics');
-    
-    const displayLyrics = lyrics.map(lyric => {
-        return lyric.split(' ').map(word => {
-            const cleanWord = word.toLowerCase().replace(/[^a-z]/g, '');
-            if (guessedWords.has(cleanWord)) {
-                return word;
-            } else {
-                return '_'.repeat(word.length);
-            }
-        }).join(' ');
-    }).join('\n');
-    
-    lyricsContainer.textContent = displayLyrics;
+export function renderLyrics(guessedWords) {
+   const cells = document.querySelectorAll('#lyrics-table td');
+
+    cells.forEach(cell => {
+        const cleanWord = cell.dataset.word
+            .toLowerCase()
+            .replace(/[^a-z]/g, '');
+
+        cell.textContent = guessedWords.has(cleanWord)
+            ? cell.dataset.word
+            : '______';
+    });
 }
+
+
+export function buildTable(lyrics) {
+    const lyricsContainer = document.getElementById('lyrics-table');
+
+    // Clear previous content
+    if (lyricsContainer !== null) lyricsContainer.innerHTML = "";
+    const tbody = document.createElement('tbody');
+    let trow = document.createElement('tr');
+
+    for (let i = 0; i < lyrics.length; i++) {
+        const td = document.createElement('td');
+        td.textContent = "______";
+        td.dataset.word = lyrics[i];
+        trow.appendChild(td);
+
+        // Every 4 words, finish the row
+        if ((i + 1) % 7 === 0) {
+            tbody.appendChild(trow);
+            trow = document.createElement('tr');
+        }
+    }
+
+    // Append leftover row if it has cells
+    if (trow.children.length > 0) {
+        tbody.appendChild(trow);
+    }
+
+    lyricsContainer.appendChild(tbody);
+}
+
 
 export function showGameSection() {
     document.getElementById('game').style.display = 'block';
