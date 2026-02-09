@@ -17,7 +17,8 @@ import {
     buildTable,
     showGameSection,
     hideGameSection,
-    revealHiddenLyrics
+    revealHiddenLyrics,
+    buildLibrary
 } from './components.js';
 
 // ==================== GAME STATE ====================
@@ -32,9 +33,9 @@ let library = {};
 async function initGame() {
     library = await getSongLibrary();
     console.log(library);
-    // Initialize UI components
+    // Initialize UI components 
     initComponents();
-    
+    buildLibrary(library);
     // Set up event listeners
     const form = document.getElementById('selection');
     const guessInput = document.getElementById('gameinput');

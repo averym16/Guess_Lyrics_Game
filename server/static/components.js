@@ -121,7 +121,7 @@ export function loadNavbar() {
 export function loadFooter() {
     const footer = document.querySelector('.footer');
     footer.innerHTML = `
-        <p>&copy; ${new Date().getFullYear()} Guess The Lyrics. All rights reserved.</p>
+        <p>&copy; ${new Date().getFullYear()} Guess The Lyrics.</p>
     `;
 }
 
@@ -172,7 +172,7 @@ export function buildTable(lyrics) {
         trow.appendChild(td);
 
         // Every 4 words, finish the row
-        if ((i + 1) % 7 === 0) {
+        if ((i + 1) % 10 === 0) {
             tbody.appendChild(trow);
             trow = document.createElement('tr');
         }
@@ -185,14 +185,24 @@ export function buildTable(lyrics) {
 
     lyricsContainer.appendChild(tbody);
 }
+export function buildLibrary(library){
+    const song_list = document.getElementById('song-list');
+    library.forEach(item => {
 
+        const li = document.createElement('li');
+        li.textContent = item.title + ' - ' + item.artist;
+        song_list.appendChild(li);
+    });
+}
 
 export function showGameSection() {
     document.getElementById('game').style.display = 'block';
+    document.getElementById('options').style.display = 'none';
 }
 
 export function hideGameSection() {
     document.getElementById('game').style.display = 'none';
+    document.getElementById('options').style.display = 'block';
 }
 
 // ==================== INITIALIZE ====================

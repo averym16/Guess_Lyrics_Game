@@ -25,11 +25,17 @@
                     <label>Seconds: <input type="number" id="secondsInput" min="0" max="59" value="0"></label>
                 </div>
             
-                <button type="submit" id="startBtn">Submit</button>
+                <button type="submit" id="startBtn">Start Game</button>
                 </form>
             </section>
 
-            
+            <section id="options" style="display: block">
+                These are all the songs in the library. Click start to 
+                guess lyrics from a random song. Select a specific one by typing artist and song in the fields above, and then clicking start.
+                <ul id="song-list">
+
+                </ul>
+            </section>
             <section id="game" style="display: none;">
                 <div id="display">00:00</div>
                 
@@ -40,7 +46,6 @@
                        spellcheck="false" 
                        autocomplete="off" 
                        autocorrect="off">
-                <button  id="startBtn">Submit</button>
                 <button id="pauseBtn">Pause</button>
                 <button id="stopBtn">Stop</button>
                 <button id="resetBtn">Reset</button>
