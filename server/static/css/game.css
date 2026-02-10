@@ -1,0 +1,305 @@
+/* ==================== GAME PAGE STYLES ==================== */
+
+/* Game Settings Form */
+.game-settings {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(139, 92, 246, 0.05));
+}
+
+#selection {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.timer-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    background-color: var(--background);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border-color);
+}
+
+.timer-container label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.timer-container input {
+    margin-top: 0.25rem;
+}
+
+/* Options Section (Song List) */
+#options {
+    background-color: var(--surface);
+}
+
+#song-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 1.5rem;
+    display: grid;
+    gap: 0.75rem;
+}
+
+#song-list li {
+    padding: 1rem 1.25rem;
+    background-color: var(--background);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    color: var(--text-primary);
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+#song-list li:hover {
+    border-color: var(--primary-color);
+    background-color: var(--surface-hover);
+    transform: translateX(4px);
+}
+
+/* Game Section */
+#game {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(139, 92, 246, 0.05));
+    border: 2px solid var(--border-color);
+}
+
+/* Timer Display */
+#display {
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--primary-color);
+    background-color: var(--background);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    border: 2px solid var(--border-color);
+    box-shadow: var(--shadow-md);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.1em;
+}
+
+/* Game Input */
+#answer {
+    font-size: 1.125rem;
+    margin-bottom: 0.75rem;
+    display: block;
+    text-align: center;
+}
+
+.answerEntry {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    font-size: 1.125rem;
+    text-align: center;
+    border: 2px solid var(--primary-color);
+    border-radius: 0.75rem;
+    margin-bottom: 1.5rem;
+    background-color: var(--background);
+    box-shadow: var(--shadow-md);
+}
+
+.answerEntry:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+}
+
+/* Game Controls */
+#game button {
+    margin-right: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+/* Score Display */
+#score {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--success-color);
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: var(--background);
+    border-radius: 0.75rem;
+    border: 2px solid var(--success-color);
+    box-shadow: var(--shadow-md);
+}
+
+/* ==================== LYRICS TABLE ==================== */
+.lyrics {
+    background-color: var(--background);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow-lg);
+}
+
+#lyrics-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0.5rem;
+    margin: 0 auto;
+}
+
+#lyrics-table td {
+    padding: 1rem;
+    text-align: center;
+    background-color: var(--surface);
+    border: 2px solid var(--border-color);
+    border-radius: 0.5rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    transition: var(--transition);
+    min-width: 100px;
+    box-shadow: var(--shadow-sm);
+}
+
+#lyrics-table td:empty::after {
+    content: '______';
+    color: var(--text-secondary);
+}
+
+/* Revealed word animation */
+#lyrics-table td:not(:empty) {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+    border-color: var(--primary-color);
+    animation: revealWord 0.3s ease-out;
+}
+
+@keyframes revealWord {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Missed words (red) */
+#lyrics-table td[style*="red"] {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: var(--error-color);
+    color: var(--error-color);
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+@media (max-width: 768px) {
+    #display {
+        font-size: 2.5rem;
+        padding: 1rem;
+    }
+
+    .timer-container {
+        grid-template-columns: 1fr;
+    }
+
+    #score {
+        font-size: 1.5rem;
+    }
+
+    #lyrics-table {
+        border-spacing: 0.25rem;
+    }
+
+    #lyrics-table td {
+        padding: 0.75rem;
+        font-size: 1rem;
+        min-width: 80px;
+    }
+
+    #game button {
+        width: 48%;
+        margin-right: 2%;
+        margin-bottom: 1rem;
+    }
+
+    #game button:nth-child(2n) {
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    #display {
+        font-size: 2rem;
+    }
+
+    .answerEntry {
+        font-size: 1rem;
+        padding: 0.875rem;
+    }
+
+    #lyrics-table {
+        border-spacing: 0.125rem;
+    }
+
+    #lyrics-table td {
+        padding: 0.5rem;
+        font-size: 0.875rem;
+        min-width: 60px;
+    }
+
+    #game button {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    #score {
+        font-size: 1.25rem;
+        padding: 0.75rem;
+    }
+}
+
+/* ==================== GAME STATES ==================== */
+
+/* Loading state */
+.loading #lyrics-table td {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Game over state */
+.game-over #display {
+    color: var(--error-color);
+    border-color: var(--error-color);
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-10px);
+    }
+    75% {
+        transform: translateX(10px);
+    }
+}
+
+/* Success state */
+.all-correct #score {
+    animation: celebrate 0.6s ease-in-out;
+}
+
+@keyframes celebrate {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
