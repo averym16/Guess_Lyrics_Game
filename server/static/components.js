@@ -15,6 +15,7 @@ export function initTimer() {
     const startBtn = document.getElementById('startBtn');
     const pauseBtn = document.getElementById('pauseBtn');
     const stopBtn = document.getElementById('stopBtn');
+    const resetBtn = document.getElementById('resetBtn');
     
     // Note: These are separate from game start
     // You'll trigger startTimer from game_logic.js when game actually starts
@@ -33,8 +34,7 @@ export function startTimer() {
     timeLeft = (minutes * 60) + seconds;
     
     if (timeLeft <= 0) {
-        alert('Please set a timer duration');
-        return;
+        return false;
     }
     
     countdown = setInterval(() => {
@@ -56,6 +56,8 @@ export function startTimer() {
             timeLeft--;
         }
     }, 1000);
+
+    return true;
 }
 
 export function pauseTimer() {
@@ -87,6 +89,11 @@ export function setTimerEndCallback(callback) {
     onTimerEnd = callback;
 }
 
+export function displayScore(score, total)
+{
+    document.getElementById('score').innerHTML = score + '/' + total;   
+}
+
 // ==================== THEME ====================
 export function setTheme(theme) {
     document.body.className = theme;
@@ -111,6 +118,7 @@ export function loadNavbar() {
         <a href="/">Home</a>
         <a href="/guess">Play</a>
         <button id="themeToggle">Toggle Theme</button>
+        <button id="open-instructions">Instructions</button>
     `;
     
     document.getElementById('themeToggle')?.addEventListener('click', toggleTheme);
@@ -120,34 +128,92 @@ export function loadNavbar() {
 export function loadFooter() {
     const footer = document.querySelector('.footer');
     footer.innerHTML = `
-        <p>&copy; ${new Date().getFullYear()} Guess The Lyrics. All rights reserved.</p>
+        <p>&copy; ${new Date().getFullYear()} Guess The Lyrics.</p>
     `;
 }
 
 // ==================== LYRICS DISPLAY ====================
-export function renderLyrics(lyrics, guessedWords) {
-    const lyricsContainer = document.getElementById('lyrics');
-    
-    const displayLyrics = lyrics.map(lyric => {
-        return lyric.split(' ').map(word => {
-            const cleanWord = word.toLowerCase().replace(/[^a-z]/g, '');
-            if (guessedWords.has(cleanWord)) {
-                return word;
-            } else {
-                return '_'.repeat(word.length);
-            }
-        }).join(' ');
-    }).join('\n');
-    
-    lyricsContainer.textContent = displayLyrics;
+export function renderLyrics(guessedWords) {
+   const cells = document.querySelectorAll('#lyrics-table td');
+
+    cells.forEach(cell => {
+        const cleanWord = cell.dataset.word
+            .toLowerCase()
+            .replace(/[^a-z]/g, '');
+
+        cell.textContent = guessedWords.has(cleanWord)
+            ? cell.dataset.word
+            : '______';
+    });
+}
+
+export function revealHiddenLyrics(guessedWords)
+{
+    const cells = document.querySelectorAll('#lyrics-table td');
+
+    cells.forEach(cell => {
+        const cleanWord = cell.dataset.word
+            .toLowerCase()
+            .replace(/[^a-z]/g, '');
+
+        if ( !guessedWords.has(cleanWord) ){
+            cell.textContent = cell.dataset.word;
+            cell.style.color = 'red';
+        }
+    });
+}
+
+
+export function buildTable(lyrics) {
+    const lyricsContainer = document.getElementById('lyrics-table');
+
+    // Clear previous content
+    if (lyricsContainer !== null) lyricsContainer.innerHTML = "";
+    const tbody = document.createElement('tbody');
+    let trow = document.createElement('tr');
+
+    for (let i = 0; i < lyrics.length; i++) {
+        const td = document.createElement('td');
+        td.textContent = "______";
+        td.dataset.word = lyrics[i];
+        trow.appendChild(td);
+
+        // Every 4 words, finish the row
+        if ((i + 1) % 10 === 0) {
+            tbody.appendChild(trow);
+            trow = document.createElement('tr');
+        }
+    }
+
+    // Append leftover row if it has cells
+    if (trow.children.length > 0) {
+        tbody.appendChild(trow);
+    }
+
+    lyricsContainer.appendChild(tbody);
+}
+export function buildLibrary(library){
+    const song_list = document.getElementById('song-list');
+    library.forEach(item => {
+
+        const li = document.createElement('li');
+        li.textContent = item.title + ' - ' + item.artist;
+        song_list.appendChild(li);
+    });
 }
 
 export function showGameSection() {
     document.getElementById('game').style.display = 'block';
+    document.getElementById('lyrics').style.display = 'block';
+    document.getElementById('settings').style.display = 'none';
+    document.getElementById('options').style.display = 'none';
 }
 
 export function hideGameSection() {
     document.getElementById('game').style.display = 'none';
+    document.getElementById('lyrics').style.display = 'none';
+    document.getElementById('settings').style.display = 'block';
+    document.getElementById('options').style.display = 'block';
 }
 
 // ==================== INITIALIZE ====================

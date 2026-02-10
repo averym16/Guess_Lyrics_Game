@@ -1,0 +1,326 @@
+/* ==================== CSS RESET & BASE ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Light Theme Colors */
+    --primary-color: #6366f1;
+    --primary-hover: #4f46e5;
+    --secondary-color: #8b5cf6;
+    --background: #ffffff;
+    --surface: #f8fafc;
+    --surface-hover: #f1f5f9;
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --border-color: #e2e8f0;
+    --success-color: #10b981;
+    --error-color: #ef4444;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+    --transition: all 0.3s ease;
+}
+
+/* Dark Theme */
+body.dark {
+    --background: #0f172a;
+    --surface: #1e293b;
+    --surface-hover: #334155;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --border-color: #334155;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.3);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.3);
+}
+
+/* ==================== TYPOGRAPHY ==================== */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--background);
+    color: var(--text-primary);
+    line-height: 1.6;
+    transition: var(--transition);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 2rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+    color: var(--text-primary);
+}
+
+h3 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+}
+
+p {
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+}
+
+/* ==================== NAVBAR ==================== */
+#navbar {
+    background-color: var(--surface);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: var(--transition);
+}
+
+#navbar a {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: var(--transition);
+}
+
+#navbar a:hover {
+    background-color: var(--surface-hover);
+    color: var(--primary-color);
+}
+
+#navbar a:first-child {
+    margin-right: auto;
+}
+
+#themeToggle {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+}
+
+#themeToggle:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* ==================== MAIN CONTENT ==================== */
+main {
+    flex: 1;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    padding: 1rem 0;
+}
+
+/* ==================== BUTTONS ==================== */
+button, .btn, a[href="/guess"], a[href*="Start"] {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-md);
+    text-decoration: none;
+    display: inline-block;
+}
+
+button:hover, .btn:hover, a[href="/guess"]:hover, a[href*="Start"]:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    opacity: 0.9;
+}
+
+button:active, .btn:active {
+    transform: translateY(0);
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Secondary Buttons */
+#pauseBtn, #stopBtn, #resetBtn {
+    background: var(--surface);
+    color: var(--text-primary);
+    border: 2px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+}
+
+#pauseBtn:hover, #stopBtn:hover, #resetBtn:hover {
+    background: var(--surface-hover);
+    border-color: var(--primary-color);
+}
+
+/* ==================== INPUTS ==================== */
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    background-color: var(--surface);
+    color: var(--text-primary);
+    transition: var(--transition);
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+input[type="text"]::placeholder {
+    color: var(--text-secondary);
+}
+
+/* ==================== FORMS ==================== */
+form {
+    background-color: var(--surface);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+form > *:not(:last-child) {
+    margin-bottom: 1rem;
+}
+
+/* ==================== SECTIONS ==================== */
+section {
+    background-color: var(--surface);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow-md);
+}
+
+/* ==================== FOOTER ==================== */
+.footer {
+    background-color: var(--surface);
+    border-top: 1px solid var(--border-color);
+    padding: 1rem 2rem;
+    text-align: center;
+    margin-top: auto;
+}
+
+.footer p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* POPUP INSTRUCTIONS */
+#instructions {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Styles when the dialog is open (backdrop) */
+#instructions::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Optional: Additional styling for the close button */
+#close-instructions {
+    margin-top: 15px;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+#open-instructions {
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+@media (max-width: 768px) {
+    main {
+        padding: 1rem;
+    }
+
+    #navbar {
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    section, form {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.75rem;
+    }
+
+    button, .btn {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    #navbar {
+        flex-wrap: wrap;
+    }
+}

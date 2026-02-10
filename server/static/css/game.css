@@ -1,0 +1,376 @@
+/* ==================== GAME PAGE STYLES ==================== */
+
+/* Game Settings Form */
+.game-settings {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(139, 92, 246, 0.05));
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.game-settings form {
+    padding: 1.5rem;
+    margin-bottom: 0;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group > label {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.form-group input[type="text"] {
+    padding: 0.75rem;
+    font-size: 0.95rem;
+}
+
+.timer-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.timer-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.timer-field label {
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.timer-field input {
+    padding: 0.75rem;
+    font-size: 0.95rem;
+}
+
+#startBtn {
+    width: 100%;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+}
+
+/* Options Section (Song List) */
+#options {
+    background-color: var(--surface);
+    padding: 1rem;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+#song-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 0.75rem;
+    display: grid;
+    gap: 0.5rem;
+}
+
+#song-list li {
+    padding: 0.625rem 1rem;
+    background-color: var(--background);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    color: var(--text-primary);
+    transition: var(--transition);
+    cursor: pointer;
+    font-size: 0.875rem;
+}
+
+#song-list li:hover {
+    border-color: var(--primary-color);
+    background-color: var(--surface-hover);
+    transform: translateX(4px);
+}
+
+/* Game Section */
+#game {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(139, 92, 246, 0.05));
+    border: 2px solid var(--border-color);
+    padding: 1rem;
+}
+
+/* Timer Display */
+#display {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--primary-color);
+    background-color: var(--background);
+    padding: 0.75rem;
+    border-radius: 0.75rem;
+    margin-bottom: 1rem;
+    border: 2px solid var(--border-color);
+    box-shadow: var(--shadow-md);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.1em;
+}
+
+/* Game Input */
+#answer {
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+    display: block;
+    text-align: center;
+}
+
+.answerEntry {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    text-align: center;
+    border: 2px solid var(--primary-color);
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    background-color: var(--background);
+    box-shadow: var(--shadow-md);
+}
+
+.answerEntry:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+}
+
+/* Game Controls */
+#game button {
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+}
+
+/* Score Display */
+#score {
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--success-color);
+    margin-top: 1rem;
+    padding: 0.5rem;
+    background-color: var(--background);
+    border-radius: 0.5rem;
+    border: 2px solid var(--success-color);
+    box-shadow: var(--shadow-md);
+}
+
+/* ==================== LYRICS TABLE ==================== */
+#lyrics {
+    background-color: var(--background);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow-lg);
+    min-height: 500px;
+    max-height: 600px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+#lyrics::-webkit-scrollbar {
+    width: 8px;
+}
+
+#lyrics::-webkit-scrollbar-track {
+    background: var(--surface);
+    border-radius: 10px;
+}
+
+#lyrics::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 10px;
+}
+
+#lyrics::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-hover);
+}
+
+#lyrics-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0.5rem;
+    margin: 0 auto;
+}
+
+#lyrics-table td {
+    padding: 0.75rem;
+    text-align: center;
+    background-color: var(--surface);
+    border: 2px solid var(--border-color);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    transition: var(--transition);
+    min-width: 80px;
+    box-shadow: var(--shadow-sm);
+}
+
+#lyrics-table td:empty::after {
+    content: '______';
+    color: var(--text-secondary);
+}
+
+/* Revealed word animation */
+#lyrics-table td:not(:empty) {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+    border-color: var(--primary-color);
+    animation: revealWord 0.3s ease-out;
+}
+
+@keyframes revealWord {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Missed words (red) */
+#lyrics-table td[style*="red"] {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: var(--error-color);
+    color: var(--error-color);
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .timer-inputs {
+        gap: 0.5rem;
+    }
+
+    #display {
+        font-size: 2.5rem;
+        padding: 1rem;
+    }
+
+    #score {
+        font-size: 1.5rem;
+    }
+
+    #lyrics-table {
+        border-spacing: 0.25rem;
+    }
+
+    #lyrics-table td {
+        padding: 0.75rem;
+        font-size: 1rem;
+        min-width: 80px;
+    }
+
+    #game button {
+        width: 48%;
+        margin-right: 2%;
+        margin-bottom: 1rem;
+    }
+
+    #game button:nth-child(2n) {
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    #display {
+        font-size: 2rem;
+    }
+
+    .answerEntry {
+        font-size: 1rem;
+        padding: 0.875rem;
+    }
+
+    #lyrics-table {
+        border-spacing: 0.125rem;
+    }
+
+    #lyrics-table td {
+        padding: 0.5rem;
+        font-size: 0.875rem;
+        min-width: 60px;
+    }
+
+    #game button {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    #score {
+        font-size: 1.25rem;
+        padding: 0.75rem;
+    }
+}
+
+/* ==================== GAME STATES ==================== */
+
+/* Loading state */
+.loading #lyrics-table td {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Game over state */
+.game-over #display {
+    color: var(--error-color);
+    border-color: var(--error-color);
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-10px);
+    }
+    75% {
+        transform: translateX(10px);
+    }
+}
+
+/* Success state */
+.all-correct #score {
+    animation: celebrate 0.6s ease-in-out;
+}
+
+@keyframes celebrate {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}

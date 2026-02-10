@@ -1,0 +1,97 @@
+/* ==================== HOME PAGE STYLES ==================== */
+
+/* Hero Section */
+.home {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Options Section */
+.options {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+    border: 2px solid var(--border-color);
+}
+
+.options h3 {
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+    font-size: 1.75rem;
+}
+
+.options div {
+    margin-top: 1.5rem;
+}
+
+.options a {
+    display: inline-block;
+    font-size: 1.25rem;
+    padding: 1rem 2.5rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    text-decoration: none;
+    border-radius: 0.75rem;
+    font-weight: 700;
+    box-shadow: var(--shadow-lg);
+    transition: var(--transition);
+}
+
+.options a:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.2);
+}
+
+/* Description Section */
+#description {
+    background-color: var(--surface);
+    padding: 2.5rem;
+    border-left: 4px solid var(--primary-color);
+}
+
+#description p {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+@media (max-width: 768px) {
+    .home {
+        font-size: 2.5rem;
+    }
+
+    .options {
+        padding: 2rem 1rem;
+    }
+
+    .options h3 {
+        font-size: 1.5rem;
+    }
+
+    .options a {
+        font-size: 1.125rem;
+        padding: 0.875rem 2rem;
+    }
+
+    #description {
+        padding: 2rem;
+    }
+
+    #description p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .home {
+        font-size: 2rem;
+    }
+
+    .options a {
+        width: 100%;
+        padding: 1rem;
+    }
+}

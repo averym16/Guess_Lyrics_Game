@@ -3,6 +3,8 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/static/css/common.css">
+        <link rel="stylesheet" href="/static/css/game.css">
         <title>Guess The Lyrics | Lyric Game</title>
     </head>
     <body>
@@ -11,25 +13,43 @@
             <header>
                 <h1 name="home" class="home">Guess The Lyrics</h1>
             </header>
-            
-            <section class="game-settings">
-                <form id="selection">
-                    <label for="artist">Choose An Artist:</label>
-                    <input type="text" id="artist" name="artist" placeholder="Random">
+           <section class="game-settings" id="settings" style="display: block">
+            <form id="selection">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="artist">Choose An Artist:</label>
+                        <input type="text" id="artist" name="artist" placeholder="Random">
+                    </div>
                     
-                    <label for="song">Choose A Song:</label>
-                    <input type="text" id="song" name="song" placeholder="Random">
-                <label for="timer">Set Timer:</label>
-                <div class="timer-container">
-                    <label>Minutes: <input type="number" id="minutesInput" min="0" value="0"></label>
-                    <label>Seconds: <input type="number" id="secondsInput" min="0" max="59" value="0"></label>
+                    <div class="form-group">
+                        <label for="song">Choose A Song:</label>
+                        <input type="text" id="song" name="song" placeholder="Random">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="timer">Set Timer:</label>
+                        <div class="timer-inputs">
+                            <div class="timer-field">
+                                <label for="minutesInput">Minutes:</label>
+                                <input type="number" id="minutesInput" min="0" value="0">
+                            </div>
+                            <div class="timer-field">
+                                <label for="secondsInput">Seconds:</label>
+                                <input type="number" id="secondsInput" min="0" max="59" value="0">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            
-                <button type="submit" id="startBtn">Submit</button>
-                </form>
-            </section>
+                
+                <button type="submit" id="startBtn">Start Game</button>
+            </form>
+        </section>
+            <section id="options" style="display: block">
+                <h3>Song Library</h3>
+                <ul id="song-list">
 
-            
+                </ul>
+            </section>
             <section id="game" style="display: none;">
                 <div id="display">00:00</div>
                 
@@ -40,14 +60,16 @@
                        spellcheck="false" 
                        autocomplete="off" 
                        autocorrect="off">
-                <button  id="startBtn">Submit</button>
                 <button id="pauseBtn">Pause</button>
                 <button id="stopBtn">Stop</button>
+                <button id="resetBtn">Reset</button>
+                <div id="score">0/0</div>
             </section>
-            <section class="lyrics">
+            <section id="lyrics" style="display: none;">
                 
-                <table class="lyrics-table">
+                <table id="lyrics-table">
                 </table>
+            
             </section>
         </main>
         

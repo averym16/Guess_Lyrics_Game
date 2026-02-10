@@ -1,6 +1,6 @@
 import os
 from flask import Flask, jsonify, send_from_directory, request, render_template
-from sqlalchemy import and_
+from sqlalchemy import and_, func, select
 from flask_migrate import Migrate
 from dotenv import load_dotenv
 from models import db, Song
@@ -28,17 +28,32 @@ def guess_lyrics():
 def health():
     return {"ok": True}
 
+#Pull random song from database if user selects none
 @app.get("/api/songs/random")
 def random_song():
-    result = song
+    song = Song.query.order_by(func.random()).first()
+
     if not song:
-        return jsonify({"error": "no songs"}), 404
+        return jsonify({"error": "No songs found"}), 404
+
     return jsonify({
-        "artist": result.artist,
-        "song": result.title,
-        "lyrics": [l.lyric for l in result.lyrics]
+        "artist": song.artist,
+        "song": song.title,
+        "lyrics": [lyric.lyric for lyric in song.lyrics]
     })
 
+@app.get("/api/library")
+def get_library():
+    # Query using the Song model
+    songs = Song.query.with_entities(Song.artist, Song.title).all()
+    
+    if not songs:
+        return jsonify({"error": "Songs not found"}), 404
+    
+    # Convert to list of dictionaries
+    songs_list = [{"artist": song.artist, "title": song.title} for song in songs]
+    return jsonify(songs_list)
+    
 #POST request receives user selection from html 
 @app.route('/api/get_song', methods=['POST'])
 def api_get_song():
@@ -51,7 +66,7 @@ def api_get_song():
 
     result = Song.query.filter(
         Song.artist.ilike(artist),
-        Song.title.ilike(song)  # Changed from 'title' to 'song'
+        Song.title.ilike(song)
     ).first()
 
     if not result:

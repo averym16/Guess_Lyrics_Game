@@ -5,7 +5,7 @@ This file handles game state and logic:
 - Coordinates between API calls and UI updates
 */
 
-import { getSong, getRandomSong } from './api.js';
+import { getSong, getRandomSong, getSongLibrary } from './api.js';
 import { 
     initComponents,
     startTimer,
@@ -14,8 +14,12 @@ import {
     resetTimer,
     setTimerEndCallback,
     renderLyrics,
+    buildTable,
     showGameSection,
-    hideGameSection
+    hideGameSection,
+    revealHiddenLyrics,
+    buildLibrary,
+    displayScore
 } from './components.js';
 
 // ==================== GAME STATE ====================
@@ -24,19 +28,24 @@ let currentLyrics = [];
 let guessedWords = new Set();
 let score = 0;
 let totalWords = 0;
+let library = {};
 
 // ==================== INITIALIZATION ====================
-function initGame() {
-    // Initialize UI components
+async function initGame() {
+    library = await getSongLibrary();
+    console.log(library);
+    // Initialize UI components 
     initComponents();
-    
+    buildLibrary(library);
     // Set up event listeners
     const form = document.getElementById('selection');
     const guessInput = document.getElementById('gameinput');
     const startBtn = document.getElementById('startBtn');
     const pauseBtn = document.getElementById('pauseBtn');
     const stopBtn = document.getElementById('stopBtn');
-    
+    const resetBtn = document.getElementById('resetBtn');
+
+
     // Form submission starts the game
     form.addEventListener('submit', handleGameStart);
     
@@ -46,6 +55,7 @@ function initGame() {
     // Timer controls
     pauseBtn.addEventListener('click', pauseTimer);
     stopBtn.addEventListener('click', handleStopGame);
+    resetBtn.addEventListener('click', handleResetGame);
     
     // Set callback for when timer ends
     setTimerEndCallback(handleTimerEnd);
@@ -78,11 +88,18 @@ async function handleGameStart(e) {
         totalWords = calculateTotalWords(currentLyrics);
         
         // Update UI
-        renderLyrics(currentLyrics, guessedWords);
+        buildTable(currentLyrics);
+        renderLyrics(guessedWords);
         showGameSection();
+        displayScore(0, totalWords);
         
         // Start timer
-        startTimer();
+        if (!startTimer()) {
+            alert('Please set a timer duration');
+            
+            resetGame();
+            return;
+        }
         
         // Focus on guess input
         document.getElementById('gameinput').focus();
@@ -97,27 +114,23 @@ async function handleGameStart(e) {
 
 // ==================== GUESS HANDLING ====================
 function handleGuessInput(e) {
-    // Check guess on Enter key
-    if (e.key === 'Enter') {
-        const guess = e.target.value.trim().toLowerCase();
-        
-        if (!guess) return;
-        
-        const wasCorrect = checkGuess(guess);
-        
-        if (wasCorrect) {
-            e.target.value = ''; // Clear input on correct guess
-            renderLyrics(currentLyrics, guessedWords);
-            
-            // Check if game is won
-            if (checkWin()) {
-                handleGameWin();
-            }
-        } else {
-            // Optional: shake animation or feedback for wrong guess
-            e.target.classList.add('wrong-guess');
-            setTimeout(() => e.target.classList.remove('wrong-guess'), 500);
+    const guess = e.target.value.trim().toLowerCase();
+
+    if (!guess) return;
+
+    const wasCorrect = checkGuess(guess);
+
+    if (wasCorrect) {
+        e.target.value = '';   // clear after correct guess
+        renderLyrics(guessedWords);
+
+        if (checkWin()) {
+            handleGameWin();
         }
+    } else {
+        // Optional: only show feedback if the guess is "complete"
+        e.target.classList.add('wrong-guess');
+        setTimeout(() => e.target.classList.remove('wrong-guess'), 300);
     }
 }
 
@@ -127,12 +140,19 @@ function checkGuess(guess) {
     currentLyrics.forEach(lyric => {
         const words = lyric.toLowerCase().split(' ');
         words.forEach(word => {
-            const cleanWord = word.replace(/[^a-z]/g, '');
+            const cleanWord = word.replace(/[^a-z0-9]/g, '');
+            cleanWord.toLowerCase();
             
             if (cleanWord === guess && !guessedWords.has(cleanWord)) {
                 guessedWords.add(cleanWord);
                 foundMatch = true;
                 score++;
+                displayScore(score, totalWords);
+            }
+            else if (word == guess && !guessedWords.has(word))
+            {
+                guessedWords.add(word);
+                foundMatch = true;
             }
         });
     });
@@ -177,28 +197,20 @@ function handleTimerEnd() {
     `;
     
     alert(message);
-    
-    // Reveal all lyrics
-    const allWords = new Set();
-    currentLyrics.forEach(lyric => {
-        lyric.toLowerCase().split(' ').forEach(word => {
-            const cleanWord = word.replace(/[^a-z]/g, '');
-            if (cleanWord) allWords.add(cleanWord);
-        });
-    });
-    
-    guessedWords = allWords;
-    renderLyrics(currentLyrics, guessedWords);
-    
-    if (confirm('Try again?')) {
+    revealHiddenLyrics(guessedWords);
+}
+
+function handleResetGame(){
+    if (confirm('Are you sure you want to reset the game?')) {
+        stopTimer();
         resetGame();
     }
 }
 
 function handleStopGame() {
-    if (confirm('Are you sure you want to stop the game?')) {
+    if (confirm('Are you sure you want to give up?\nTHIS WILL STOP TIMER AND REVEAL ALL LYRICS!!!!')) {
         stopTimer();
-        resetGame();
+        handleTimerEnd();
     }
 }
 
@@ -229,10 +241,13 @@ function resetGame() {
     document.getElementById('artist').value = '';
     document.getElementById('song').value = '';
     document.getElementById('gameinput').value = '';
+    document.getElementById('lyrics-table').innerHTML='';
     resetTimer();
+
     
     console.log('Game reset');
 }
 
 // ==================== START THE GAME ====================
 document.addEventListener('DOMContentLoaded', initGame);
+document.addEventListener('input', handleGuessInput);
