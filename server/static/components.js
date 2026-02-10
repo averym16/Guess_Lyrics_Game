@@ -205,12 +205,14 @@ export function buildLibrary(library){
 export function showGameSection() {
     document.getElementById('game').style.display = 'block';
     document.getElementById('lyrics').style.display = 'block';
+    document.getElementById('settings').style.display = 'none';
     document.getElementById('options').style.display = 'none';
 }
 
 export function hideGameSection() {
     document.getElementById('game').style.display = 'none';
     document.getElementById('lyrics').style.display = 'none';
+    document.getElementById('settings').style.display = 'block';
     document.getElementById('options').style.display = 'block';
 }
 

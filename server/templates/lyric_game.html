@@ -13,23 +13,37 @@
             <header>
                 <h1 name="home" class="home">Guess The Lyrics</h1>
             </header>
-            <section class="game-settings">
-                <form id="selection">
-                    <label for="artist">Choo>se An Artist:</label>
-                    <input type="text" id="artist" name="artist" placeholder="Random">
+           <section class="game-settings" id="settings" style="display: block">
+            <form id="selection">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="artist">Choose An Artist:</label>
+                        <input type="text" id="artist" name="artist" placeholder="Random">
+                    </div>
                     
-                    <label for="song">Choose A Song:</label>
-                    <input type="text" id="song" name="song" placeholder="Random">
-                <label for="timer">Set Timer:</label>
-                <div class="timer-container">
-                    <label>Minutes: <input type="number" id="minutesInput" min="0" value="0"></label>
-                    <label>Seconds: <input type="number" id="secondsInput" min="0" max="59" value="0"></label>
+                    <div class="form-group">
+                        <label for="song">Choose A Song:</label>
+                        <input type="text" id="song" name="song" placeholder="Random">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="timer">Set Timer:</label>
+                        <div class="timer-inputs">
+                            <div class="timer-field">
+                                <label for="minutesInput">Minutes:</label>
+                                <input type="number" id="minutesInput" min="0" value="0">
+                            </div>
+                            <div class="timer-field">
+                                <label for="secondsInput">Seconds:</label>
+                                <input type="number" id="secondsInput" min="0" max="59" value="0">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            
+                
                 <button type="submit" id="startBtn">Start Game</button>
-                </form>
-            </section>
-
+            </form>
+        </section>
             <section id="options" style="display: block">
                 <h3>Song Library</h3>
                 <ul id="song-list">
