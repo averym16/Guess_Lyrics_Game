@@ -44,6 +44,8 @@ async function initGame() {
     const pauseBtn = document.getElementById('pauseBtn');
     const stopBtn = document.getElementById('stopBtn');
     const resetBtn = document.getElementById('resetBtn');
+
+
     // Form submission starts the game
     form.addEventListener('submit', handleGameStart);
     

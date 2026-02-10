@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/static/css/common.css">
-        <link rel="stylesheet" href="/static/css/game.css"
+        <link rel="stylesheet" href="/static/css/game.css">
         <title>Guess The Lyrics | Lyric Game</title>
     </head>
     <body>
@@ -13,10 +13,9 @@
             <header>
                 <h1 name="home" class="home">Guess The Lyrics</h1>
             </header>
-            
             <section class="game-settings">
                 <form id="selection">
-                    <label for="artist">Choose An Artist:</label>
+                    <label for="artist">Choo>se An Artist:</label>
                     <input type="text" id="artist" name="artist" placeholder="Random">
                     
                     <label for="song">Choose A Song:</label>
@@ -32,8 +31,7 @@
             </section>
 
             <section id="options" style="display: block">
-                These are all the songs in the library. Click start to 
-                guess lyrics from a random song. Select a specific one by typing artist and song in the fields above, and then clicking start.
+                <h3>Song Library</h3>
                 <ul id="song-list">
 
                 </ul>
@@ -53,10 +51,11 @@
                 <button id="resetBtn">Reset</button>
                 <div id="score">0/0</div>
             </section>
-            <section class="lyrics">
+            <section id="lyrics" style="display: none;">
                 
                 <table id="lyrics-table">
                 </table>
+            
             </section>
         </main>
         

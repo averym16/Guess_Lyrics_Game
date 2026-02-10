@@ -118,6 +118,7 @@ export function loadNavbar() {
         <a href="/">Home</a>
         <a href="/guess">Play</a>
         <button id="themeToggle">Toggle Theme</button>
+        <button id="open-instructions">Instructions</button>
     `;
     
     document.getElementById('themeToggle')?.addEventListener('click', toggleTheme);
@@ -203,11 +204,13 @@ export function buildLibrary(library){
 
 export function showGameSection() {
     document.getElementById('game').style.display = 'block';
+    document.getElementById('lyrics').style.display = 'block';
     document.getElementById('options').style.display = 'none';
 }
 
 export function hideGameSection() {
     document.getElementById('game').style.display = 'none';
+    document.getElementById('lyrics').style.display = 'none';
     document.getElementById('options').style.display = 'block';
 }
 
