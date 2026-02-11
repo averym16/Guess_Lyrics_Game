@@ -75,6 +75,7 @@ async function handleGameStart(e) {
     const artist = document.getElementById('artist').value.trim();
     const song = document.getElementById('song').value.trim();
     console.log(artist, song);
+    document.getElementById('header').innerText = song + " - " + artist; 
     
     try {
         // Fetch song from API
@@ -251,6 +252,7 @@ function resetGame() {
     document.getElementById('song').innerHTML =  '<option value="random">Random</option>';
     document.getElementById('gameinput').value = '';
     document.getElementById('lyrics-table').innerHTML='';
+    document.getElementById('header').innerText = 'Guess The Lyrics'
     loadArtists(artists);
     resetTimer();
    

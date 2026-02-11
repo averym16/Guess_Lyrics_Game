@@ -115,7 +115,7 @@ export function toggleTheme() {
 export function loadNavbar() {
     const navbar = document.getElementById('navbar');
     navbar.innerHTML = `
-        <a href="/">Home</a>
+        <a href="/">Guess The Lyrics</a>
         <a href="/guess">Play</a>
         <button id="themeToggle">Toggle Theme</button>
     `;
