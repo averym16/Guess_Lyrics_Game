@@ -26,7 +26,7 @@ def guess_lyrics():
 
 @app.get("/api/health")
 def health():
-    return {"ok": True}
+    return {'status': 'healthy'}, 200
 
 #Pull random song from database if user selects none
 @app.get("/api/songs/random")
