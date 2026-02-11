@@ -95,9 +95,8 @@ def get_songs_by_artist():
     if not result:
         return jsonify({"error": "Songs not found"}), 404
     
-    return jsonify({
-        "songs": [song.title for song in result.songs]
-    })
+    song_list = [{"song": song.title} for song in result.songs]
+    return jsonify(song_list)
 
 @app.get('/api/artist/get_artists')
 def get_artists():

@@ -195,7 +195,8 @@ button:disabled {
 
 /* ==================== INPUTS ==================== */
 input[type="text"],
-input[type="number"] {
+input[type="number"],
+select {
     width: 100%;
     padding: 0.75rem 1rem;
     border: 2px solid var(--border-color);
@@ -206,8 +207,27 @@ input[type="number"] {
     transition: var(--transition);
 }
 
+select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+}
+
+body.dark select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+}
+
+select:hover {
+    border-color: var(--primary-color);
+    background-color: var(--surface-hover);
+}
+
 input[type="text"]:focus,
-input[type="number"]:focus {
+input[type="number"]:focus,
+select:focus {
     outline: none;
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
@@ -215,6 +235,13 @@ input[type="number"]:focus {
 
 input[type="text"]::placeholder {
     color: var(--text-secondary);
+}
+
+/* Select option styling */
+select option {
+    background-color: var(--surface);
+    color: var(--text-primary);
+    padding: 0.5rem;
 }
 
 /* ==================== FORMS ==================== */
@@ -263,10 +290,65 @@ section {
 
 /* POPUP INSTRUCTIONS */
 #instructions {
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 2rem;
+    border: 2px solid var(--border-color);
+    border-radius: 1rem;
+    box-shadow: var(--shadow-lg);
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.03), rgba(139, 92, 246, 0.03));
+}
+
+#instructions h2 {
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    font-size: 1.75rem;
+}
+
+#instructions p {
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
+    color: var(--text-primary);
+}
+
+#instructions #bold {
+    font-weight: 700;
+    color: var(--primary-color);
+    background-color: rgba(99, 102, 241, 0.1);
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    border-left: 4px solid var(--primary-color);
+}
+
+#instruction_list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#instruction_list li {
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.75rem;
+    background-color: var(--surface);
+    border: 2px solid var(--border-color);
+    border-radius: 0.75rem;
+    color: var(--text-primary);
+    transition: var(--transition);
+    position: relative;
+    padding-left: 3rem;
+}
+
+#instruction_list li:hover {
+    border-color: var(--primary-color);
+    background-color: var(--surface-hover);
+    transform: translateX(4px);
+}
+
+#instruction_list li::before {
+    content: '→';
+    position: absolute;
+    left: 1.25rem;
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 1.25rem;
 }
 
 /* Styles when the dialog is open (backdrop) */
@@ -308,6 +390,25 @@ section {
     section, form {
         padding: 1.5rem;
     }
+
+    #instructions {
+        padding: 1.5rem;
+    }
+
+    #instructions h2 {
+        font-size: 1.5rem;
+    }
+
+    #instruction_list li {
+        padding: 0.875rem 1rem;
+        padding-left: 2.5rem;
+        font-size: 0.95rem;
+    }
+
+    #instruction_list li::before {
+        left: 1rem;
+        font-size: 1.1rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -322,5 +423,24 @@ section {
 
     #navbar {
         flex-wrap: wrap;
+    }
+
+    #instructions {
+        padding: 1.25rem;
+    }
+
+    #instructions #bold {
+        font-size: 0.95rem;
+        padding: 0.625rem 0.875rem;
+    }
+
+    #instruction_list li {
+        padding: 0.75rem 0.875rem;
+        padding-left: 2.25rem;
+        font-size: 0.9rem;
+    }
+
+    select {
+        font-size: 0.95rem;
     }
 }

@@ -118,7 +118,6 @@ export function loadNavbar() {
         <a href="/">Home</a>
         <a href="/guess">Play</a>
         <button id="themeToggle">Toggle Theme</button>
-        <button id="open-instructions">Instructions</button>
     `;
     
     document.getElementById('themeToggle')?.addEventListener('click', toggleTheme);
@@ -192,15 +191,7 @@ export function buildTable(lyrics) {
 
     lyricsContainer.appendChild(tbody);
 }
-export function buildLibrary(library){
-    const song_list = document.getElementById('song-list');
-    library.forEach(item => {
 
-        const li = document.createElement('li');
-        li.textContent = item.title + ' - ' + item.artist;
-        song_list.appendChild(li);
-    });
-}
 export function loadArtists(artists){
     const artist_list = document.getElementById('artist');
     artists.forEach(item => {
@@ -212,9 +203,10 @@ export function loadArtists(artists){
 
 export function loadSongsByArtist(songs){
     const song_list = document.getElementById('song');
+   
     songs.forEach(item => {
         const option_song = document.createElement('option');
-        option_song.textContent = item.title;
+        option_song.textContent = item.song;
         song_list.appendChild(option_song);
     });
 }
@@ -222,14 +214,14 @@ export function showGameSection() {
     document.getElementById('game').style.display = 'block';
     document.getElementById('lyrics').style.display = 'block';
     document.getElementById('settings').style.display = 'none';
-    document.getElementById('options').style.display = 'none';
+    document.getElementById('instructions').style.display = 'none';
 }
 
 export function hideGameSection() {
     document.getElementById('game').style.display = 'none';
     document.getElementById('lyrics').style.display = 'none';
     document.getElementById('settings').style.display = 'block';
-    document.getElementById('options').style.display = 'block';
+    document.getElementById('instructions').style.display = 'block';
 }
 
 // ==================== INITIALIZE ====================

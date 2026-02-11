@@ -18,7 +18,6 @@ import {
     showGameSection,
     hideGameSection,
     revealHiddenLyrics,
-    buildLibrary,
     displayScore,
     loadSongsByArtist,
     loadArtists
@@ -36,13 +35,10 @@ let artists = {};
 
 // ==================== INITIALIZATION ====================
 async function initGame() {
-    library = await getSongLibrary();
     artists = await getArtists();
-    console.log(library);
     console.log(artists);
     // Initialize UI components 
     initComponents();
-    buildLibrary(library);
     loadArtists(artists);
     // Set up event listeners
     const form = document.getElementById('selection');
@@ -245,16 +241,17 @@ function resetGame() {
     currentSong = null;
     currentLyrics = [];
     currentArtist = null;
-    library = {};
-    artists = {};
     guessedWords.clear();
     score = 0;
     totalWords = 0;
     
     // Reset UI
     hideGameSection();
+    document.getElementById('artist').innerHTML =  '<option value="random">Random</option>';
+    document.getElementById('song').innerHTML =  '<option value="random">Random</option>';
     document.getElementById('gameinput').value = '';
     document.getElementById('lyrics-table').innerHTML='';
+    loadArtists(artists);
     resetTimer();
    
     
@@ -262,8 +259,8 @@ function resetGame() {
 }
 
 async function loadSongs(){
-    currentArtist = document.getElementById('artist').value
-    let songs_by_artist = await getSongs_ByArtist(currentArtist);
+    currentArtist = document.getElementById('artist').value;
+    const songs_by_artist = await getSongs_ByArtist(currentArtist);
     loadSongsByArtist(songs_by_artist);
 }
 
