@@ -20,7 +20,7 @@ import {
     revealHiddenLyrics,
     buildLibrary,
     displayScore,
-    loadSongs,
+    loadSongsByArtist,
     loadArtists
 } from './components.js';
 
@@ -78,10 +78,11 @@ async function handleGameStart(e) {
     
     const artist = document.getElementById('artist').value.trim();
     const song = document.getElementById('song').value.trim();
+    console.log(artist, song);
     
     try {
         // Fetch song from API
-        if (!artist && !song) {
+        if ((!artist && !song) || artist === "random"  ) {
             currentSong = await getRandomSong();
         } else if (artist && song) {
             currentSong = await getSong(artist, song);
@@ -243,18 +244,19 @@ function resetGame() {
     // Reset game state
     currentSong = null;
     currentLyrics = [];
+    currentArtist = null;
+    library = {};
+    artists = {};
     guessedWords.clear();
     score = 0;
     totalWords = 0;
     
     // Reset UI
     hideGameSection();
-    document.getElementById('artist').value = '';
-    document.getElementById('song').value = '';
     document.getElementById('gameinput').value = '';
     document.getElementById('lyrics-table').innerHTML='';
     resetTimer();
-
+   
     
     console.log('Game reset');
 }

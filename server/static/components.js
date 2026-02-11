@@ -210,7 +210,7 @@ export function loadArtists(artists){
     });
 }
 
-export function loadSongs(songs){
+export function loadSongsByArtist(songs){
     const song_list = document.getElementById('song');
     songs.forEach(item => {
         const option_song = document.createElement('option');
