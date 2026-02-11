@@ -36,7 +36,6 @@ let artists = {};
 // ==================== INITIALIZATION ====================
 async function initGame() {
     artists = await getArtists();
-    console.log(artists);
     // Initialize UI components 
     initComponents();
     loadArtists(artists);
@@ -74,17 +73,16 @@ async function handleGameStart(e) {
     
     const artist = document.getElementById('artist').value.trim();
     const song = document.getElementById('song').value.trim();
-    console.log(artist, song);
     
     try {
         // Fetch song from API
         if ((!artist && !song) || artist === "random"  ) {
             currentSong = await getRandomSong();
             document.getElementById('header').innerText = 'Random Song';
-        } else if (artist && !song)
+        } else if (artist && song === 'random')
         {
-            currentSong = await getRandSong_ByArtist
-            document.getElementById('header').innerText = artist + 'Random Song';
+            currentSong = await getRandSong_ByArtist(artist);
+            document.getElementById('header').innerText = artist + ' - Random Song';
         } else if (artist && song) {
             currentSong = await getSong(artist, song);
             document.getElementById('header').innerText = artist + '-' + song;
@@ -118,7 +116,7 @@ async function handleGameStart(e) {
         // Focus on guess input
         document.getElementById('gameinput').focus();
         
-        console.log(`Game started: ${currentSong.song} by ${currentSong.artist}`);
+        console.log(`Game started`);
         
     } catch (error) {
         alert('Song not found. Please try again.');

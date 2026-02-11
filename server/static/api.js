@@ -16,8 +16,6 @@ export async function getSong(artist, song) {
             throw new Error(error.error || 'Failed to fetch song');
         }
         const data = await response.json(); 
-        console.log('Song data:', data);      
-        console.log('Lyrics:', data.lyrics);  
         return data;                          
         
     } catch (error) {
@@ -83,8 +81,7 @@ export async function getSongs_ByArtist(artist){
             const error = await response.json();
             throw new Error(error.error || 'Failed to fetch songs by artist');
         }
-        const data = await response.json(); 
-        console.log('Songs By Artist:', data);      
+        const data = await response.json();   
         return data;                          
         
     } catch (error) {
