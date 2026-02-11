@@ -57,7 +57,6 @@ export async function getSongLibrary() {
 
 export async function getArtists(){
     try {
-        // Fixed: Changed '/api/artists/get_artists' to '/api/artist/get_artists'
         const response = await fetch('/api/artist/get_artists');
         
         if (!response.ok) {
@@ -72,8 +71,7 @@ export async function getArtists(){
 
 export async function getSongs_ByArtist(artist){
      try {
-        // Fixed: Changed '/api/artists/get_songs' to '/api/artist/get_songs'
-        const response = await fetch('/api/artist/get_songs', {
+            const response = await fetch('/api/artist/get_songs', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -93,4 +91,28 @@ export async function getSongs_ByArtist(artist){
         console.error('Error fetching song:', error);
         throw error;
     }
+}
+
+export async function getRandSong_ByArtist(artist){
+    try {
+        const response = await fetch('/api/artist/get_random_song', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ artist })
+        });
+        
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'Failed to fetch random song by artist');
+        }
+        const data = await response.json(); 
+        return data;                          
+        
+    } catch (error) {
+        console.error('Error fetching song:', error);
+        throw error;
+    }
+
 }

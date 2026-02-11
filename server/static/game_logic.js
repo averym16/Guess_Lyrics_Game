@@ -5,7 +5,7 @@ This file handles game state and logic:
 - Coordinates between API calls and UI updates
 */
 
-import { getSong, getRandomSong, getSongLibrary, getArtists, getSongs_ByArtist } from './api.js';
+import { getSong, getRandomSong, getArtists, getSongs_ByArtist, getRandSong_ByArtist } from './api.js';
 import { 
     initComponents,
     startTimer,
@@ -83,7 +83,7 @@ async function handleGameStart(e) {
             document.getElementById('header').innerText = 'Random Song';
         } else if (artist && !song)
         {
-            
+            currentSong = await getRandSong_ByArtist
             document.getElementById('header').innerText = artist + 'Random Song';
         } else if (artist && song) {
             currentSong = await getSong(artist, song);
