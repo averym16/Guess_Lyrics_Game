@@ -5,7 +5,7 @@ This file handles game state and logic:
 - Coordinates between API calls and UI updates
 */
 
-import { getSong, getRandomSong, getSongLibrary } from './api.js';
+import { getSong, getRandomSong, getSongLibrary, getArtists, getSongs_ByArtist } from './api.js';
 import { 
     initComponents,
     startTimer,
@@ -19,7 +19,9 @@ import {
     hideGameSection,
     revealHiddenLyrics,
     buildLibrary,
-    displayScore
+    displayScore,
+    loadSongs,
+    loadArtists
 } from './components.js';
 
 // ==================== GAME STATE ====================
@@ -27,16 +29,21 @@ let currentSong = null;
 let currentLyrics = [];
 let guessedWords = new Set();
 let score = 0;
+let currentArtist = null;
 let totalWords = 0;
 let library = {};
+let artists = {};
 
 // ==================== INITIALIZATION ====================
 async function initGame() {
     library = await getSongLibrary();
+    artists = await getArtists();
     console.log(library);
+    console.log(artists);
     // Initialize UI components 
     initComponents();
     buildLibrary(library);
+    loadArtists(artists);
     // Set up event listeners
     const form = document.getElementById('selection');
     const guessInput = document.getElementById('gameinput');
@@ -44,11 +51,15 @@ async function initGame() {
     const pauseBtn = document.getElementById('pauseBtn');
     const stopBtn = document.getElementById('stopBtn');
     const resetBtn = document.getElementById('resetBtn');
+    const artist_select = document.getElementById('artist');
 
+
+    artist_select.addEventListener('change', loadSongs);
+    
 
     // Form submission starts the game
     form.addEventListener('submit', handleGameStart);
-    
+   
     // Guess input handling
     guessInput.addEventListener('keypress', handleGuessInput);
     
@@ -246,6 +257,12 @@ function resetGame() {
 
     
     console.log('Game reset');
+}
+
+async function loadSongs(){
+    currentArtist = document.getElementById('artist').value
+    let songs_by_artist = await getSongs_ByArtist(currentArtist);
+    loadSongsByArtist(songs_by_artist);
 }
 
 // ==================== START THE GAME ====================

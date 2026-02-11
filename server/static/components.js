@@ -201,7 +201,23 @@ export function buildLibrary(library){
         song_list.appendChild(li);
     });
 }
+export function loadArtists(artists){
+    const artist_list = document.getElementById('artist');
+    artists.forEach(item => {
+        const option_artist = document.createElement('option');
+        option_artist.textContent = item.artist;
+        artist_list.appendChild(option_artist);
+    });
+}
 
+export function loadSongs(songs){
+    const song_list = document.getElementById('song');
+    songs.forEach(item => {
+        const option_song = document.createElement('option');
+        option_song.textContent = item.title;
+        song_list.appendChild(option_song);
+    });
+}
 export function showGameSection() {
     document.getElementById('game').style.display = 'block';
     document.getElementById('lyrics').style.display = 'block';

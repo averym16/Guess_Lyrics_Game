@@ -1,7 +1,7 @@
 import json, string
 from app import app
 import re
-from models import db, Song, Lyric
+from models import db, Song, Lyric, Artist
 
 def valid(words):
     """
@@ -28,6 +28,7 @@ def valid(words):
                 result.append(cleaned)
     
     return result
+
 def seed():
 
     with open("data.json") as f:
@@ -39,13 +40,19 @@ def seed():
             return
 
         for item in data["Song"]:
-            song = Song(
-                title=item["title"],
-                artist=item["artist"]
-            )
+            # Check if artist already exists
+            artist = Artist.query.filter(Artist.name.ilike(item["artist"])).first()
+            
+            if not artist:
+                artist = Artist(name=item["artist"])
+                db.session.add(artist)
+                db.session.flush()
+
+            # Fixed: Assign the song to a variable so we can use song.id later
+            song = Song(title=item["title"], artist_id=artist.id)
             db.session.add(song)
             db.session.flush()  # get song.id
-
+            
             words = item["lyrics"].split()
             valid_words = valid(words)
             for word in valid_words:

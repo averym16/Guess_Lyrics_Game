@@ -54,3 +54,43 @@ export async function getSongLibrary() {
         throw error;
     }
 }
+
+export async function getArtists(){
+    try {
+        // Fixed: Changed '/api/artists/get_artists' to '/api/artist/get_artists'
+        const response = await fetch('/api/artist/get_artists');
+        
+        if (!response.ok) {
+            throw new Error('Failed to fetch artists');
+        }
+        return response.json();
+    } catch (error) {
+        console.error('Error fetching artists', error);
+        throw error;
+    }
+}
+
+export async function getSongs_ByArtist(artist){
+     try {
+        // Fixed: Changed '/api/artists/get_songs' to '/api/artist/get_songs'
+        const response = await fetch('/api/artist/get_songs', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ artist })
+        });
+        
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'Failed to fetch songs by artist');
+        }
+        const data = await response.json(); 
+        console.log('Songs By Artist:', data);      
+        return data;                          
+        
+    } catch (error) {
+        console.error('Error fetching song:', error);
+        throw error;
+    }
+}
