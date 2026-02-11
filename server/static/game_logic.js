@@ -75,14 +75,19 @@ async function handleGameStart(e) {
     const artist = document.getElementById('artist').value.trim();
     const song = document.getElementById('song').value.trim();
     console.log(artist, song);
-    document.getElementById('header').innerText = song + " - " + artist; 
     
     try {
         // Fetch song from API
         if ((!artist && !song) || artist === "random"  ) {
             currentSong = await getRandomSong();
+            document.getElementById('header').innerText = 'Random Song';
+        } else if (artist && !song)
+        {
+            
+            document.getElementById('header').innerText = artist + 'Random Song';
         } else if (artist && song) {
             currentSong = await getSong(artist, song);
+            document.getElementById('header').innerText = artist + '-' + song;
         } else {
             alert('Please provide both artist and song, or leave both empty for random');
             return;

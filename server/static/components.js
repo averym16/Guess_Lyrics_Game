@@ -222,7 +222,7 @@ export function loadSongsByArtist(songs){
     });
 }
 export function showGameSection() {
-    document.getElementById('game').style.display = 'block';
+    document.getElementById('game').style.display = 'flex';
     document.getElementById('lyrics').style.display = 'block';
     document.getElementById('settings').style.display = 'none';
     document.getElementById('instructions').style.display = 'none';

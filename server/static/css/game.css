@@ -109,40 +109,40 @@
     background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(139, 92, 246, 0.05));
     border: 2px solid var(--border-color);
     padding: 1rem;
+    align-items: center;
+    gap: 0.75rem;
 }
 
 /* Timer Display */
 #display {
-    font-size: 2rem;
+    font-size: 1.125rem;
     font-weight: 700;
     text-align: center;
     color: var(--primary-color);
     background-color: var(--background);
-    padding: 0.75rem;
-    border-radius: 0.75rem;
-    margin-bottom: 1rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
     border: 2px solid var(--border-color);
     box-shadow: var(--shadow-md);
     font-variant-numeric: tabular-nums;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.05em;
+    min-width: 80px;
+    flex-shrink: 0;
 }
 
 /* Game Input */
 #answer {
-    font-size: 0.875rem;
-    margin-bottom: 0.5rem;
-    display: block;
-    text-align: center;
+    display: none;
 }
 
 .answerEntry {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
+    flex: 1;
+    min-width: 120px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.95rem;
     text-align: center;
     border: 2px solid var(--primary-color);
     border-radius: 0.5rem;
-    margin-bottom: 1rem;
     background-color: var(--background);
     box-shadow: var(--shadow-md);
 }
@@ -154,24 +154,27 @@
 
 /* Game Controls */
 #game button {
-    margin-right: 0.5rem;
-    margin-bottom: 0.5rem;
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
+    padding: 0.5rem 0.875rem;
+    font-size: 0.85rem;
+    margin: 0;
+    flex-shrink: 0;
+    white-space: nowrap;
 }
 
 /* Score Display */
 #score {
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-weight: 700;
     text-align: center;
     color: var(--success-color);
-    margin-top: 1rem;
-    padding: 0.5rem;
+    padding: 0.5rem 0.75rem;
     background-color: var(--background);
     border-radius: 0.5rem;
     border: 2px solid var(--success-color);
     box-shadow: var(--shadow-md);
+    min-width: 70px;
+    flex-shrink: 0;
+    white-space: nowrap;
 }
 
 /* ==================== LYRICS TABLE ==================== */
@@ -270,13 +273,27 @@
         gap: 0.5rem;
     }
 
+    #game {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+    }
+
     #display {
-        font-size: 2.5rem;
-        padding: 1rem;
+        font-size: 1.75rem;
+        padding: 0.75rem;
+    }
+
+    .answerEntry {
+        min-width: 100%;
+    }
+
+    #game button {
+        width: 100%;
     }
 
     #score {
-        font-size: 1.5rem;
+        font-size: 1.25rem;
     }
 
     #lyrics-table {
@@ -288,26 +305,22 @@
         font-size: 1rem;
         min-width: 80px;
     }
-
-    #game button {
-        width: 48%;
-        margin-right: 2%;
-        margin-bottom: 1rem;
-    }
-
-    #game button:nth-child(2n) {
-        margin-right: 0;
-    }
 }
 
 @media (max-width: 480px) {
     #display {
-        font-size: 2rem;
+        font-size: 1.5rem;
+        padding: 0.625rem 1rem;
     }
 
     .answerEntry {
-        font-size: 1rem;
-        padding: 0.875rem;
+        font-size: 0.95rem;
+        padding: 0.75rem;
+    }
+
+    #game button {
+        padding: 0.75rem;
+        font-size: 0.85rem;
     }
 
     #lyrics-table {
@@ -320,14 +333,9 @@
         min-width: 60px;
     }
 
-    #game button {
-        width: 100%;
-        margin-right: 0;
-    }
-
     #score {
-        font-size: 1.25rem;
-        padding: 0.75rem;
+        font-size: 1.125rem;
+        padding: 0.625rem 1rem;
     }
 }
 
