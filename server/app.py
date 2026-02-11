@@ -110,6 +110,36 @@ def get_artists():
     artist_list = [{"artist": artist.name} for artist in artists]
     return jsonify(artist_list)
 
+@app.route('/api/artist/get_random_song', methods=['POST'])
+def get_random_song_by_artist():
+    data = request.get_json()
+    artist_name = data.get('artist', '').strip()
+
+    if not artist_name:
+        return jsonify({"error": "Artist required"}), 400
+    
+    # Find the artist
+    artist = Artist.query.filter(
+        Artist.name.ilike(artist_name)
+    ).first()
+
+    if not artist:
+        return jsonify({"error": "Artist not found"}), 404
+    
+    # Get a random song from that artist
+    random_song = Song.query.filter(
+        Song.artist_id == artist.id
+    ).order_by(func.random()).first()
+    
+    if not random_song:
+        return jsonify({"error": "No songs found for this artist"}), 404
+    
+    return jsonify({
+        "artist": artist.name,
+        "song": random_song.title,
+        "lyrics": [lyric.lyric for lyric in random_song.lyrics]
+    })
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)
