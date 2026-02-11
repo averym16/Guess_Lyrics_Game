@@ -252,7 +252,7 @@ function resetGame() {
     document.getElementById('song').innerHTML =  '<option value="random">Random</option>';
     document.getElementById('gameinput').value = '';
     document.getElementById('lyrics-table').innerHTML='';
-    document.getElementById('header').innerText = 'Guess The Lyrics'
+    document.getElementById('header').innerText = 'Guess The Lyrics';
     loadArtists(artists);
     resetTimer();
    

@@ -116,7 +116,6 @@ export function loadNavbar() {
     const navbar = document.getElementById('navbar');
     navbar.innerHTML = `
         <a href="/">Guess The Lyrics</a>
-        <a href="/guess">Play</a>
         <button id="themeToggle">Toggle Theme</button>
     `;
     
@@ -127,7 +126,19 @@ export function loadNavbar() {
 export function loadFooter() {
     const footer = document.querySelector('.footer');
     footer.innerHTML = `
-        <p>&copy; ${new Date().getFullYear()} Guess The Lyrics.</p>
+       <section id="contact_info">
+        <ul id="contact_list">
+            <li><a href="mailto:averymorrison26@gmail.com" target="_blank"><img src="../static/images/mail.svg"></a></li>
+            <li><a href="https://github.com/averym16" target="_blank"><img src="../static/images/github.svg"></a></li>
+            <li><a href="https://www.linkedin.com/in/avery-morrison-32154b156/" target="_blank"><img src="../static/images/linkedin.svg"></a></li>
+        </ul>
+        </section>
+        <section id="footer_misc">
+        <ul id="footer_misc_list">
+            <li>Last Updated: 02/11/2026</li>
+            <li>Licensed by <a href="https://github.com/averym16/Guess_Lyrics_Game/blob/main/LICENSE">MIT</a></li>
+        </ul>
+    </section>
     `;
 }
 
