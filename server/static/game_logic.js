@@ -155,16 +155,18 @@ function checkGuess(guess) {
             const cleanWord = word.replace(/[^a-z0-9]/g, '');
             cleanWord.toLowerCase();
             
+            if (word == guess && !guessedWords.has(word))
+            {
+                guessedWords.add(word);
+                foundMatch = true;
+                score++;
+                displayScore(score, totalWords);
+            }
             if (cleanWord === guess && !guessedWords.has(cleanWord)) {
                 guessedWords.add(cleanWord);
                 foundMatch = true;
                 score++;
                 displayScore(score, totalWords);
-            }
-            else if (word == guess && !guessedWords.has(word))
-            {
-                guessedWords.add(word);
-                foundMatch = true;
             }
         });
     });
