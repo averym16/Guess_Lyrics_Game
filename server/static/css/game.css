@@ -213,6 +213,7 @@
     border-collapse: separate;
     border-spacing: 0.5rem;
     margin: 0 auto;
+    table-layout: fixed;
 }
 
 #lyrics-table td {
@@ -225,8 +226,12 @@
     font-weight: 600;
     color: var(--text-primary);
     transition: var(--transition);
+    width: 10%;
     min-width: 80px;
+    max-width: 120px;
     box-shadow: var(--shadow-sm);
+    word-wrap: break-word;
+    overflow: hidden;
 }
 
 #lyrics-table td:empty::after {
