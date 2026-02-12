@@ -149,7 +149,7 @@ export function renderLyrics(guessedWords) {
     cells.forEach(cell => {
         const cleanWord = cell.dataset.word
             .toLowerCase()
-            .replace(/[^a-z]/g, '');
+            .replace(/[^a-z0-9]/g, '');
 
         cell.textContent = guessedWords.has(cleanWord)
             ? cell.dataset.word
