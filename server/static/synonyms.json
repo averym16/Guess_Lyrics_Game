@@ -17,7 +17,19 @@
         "sim": ["mmhmm", "mmhm", "mhmhmm", "mhmm"]
     },
     {
-        "word": "DUSSÉ",
-        "sim": ["dusse"]
+        "word": "dusse",
+        "sim": ["DUSSÉ"]
+    },
+    {
+        "word": "celine",
+        "sim": ["Céline"]
+    },
+    {
+        "word": "ima",
+        "sim": ["imma"]
+    },
+    {
+        "word": "to",
+        "sim": ["too"]
     }
 ]
