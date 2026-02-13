@@ -32,10 +32,21 @@ let currentArtist = null;
 let totalWords = 0;
 let library = {};
 let artists = {};
+let synonyms = [];
 
 // ==================== INITIALIZATION ====================
 async function initGame() {
     artists = await getArtists();
+    
+    // Load synonyms
+    try {
+        const response = await fetch('./synonyms.json');
+        synonyms = await response.json();
+    } catch (error) {
+        console.error('Error loading synonyms:', error);
+        synonyms = [];
+    }
+    
     // Initialize UI components 
     initComponents();
     loadArtists(artists);
@@ -155,14 +166,22 @@ function checkGuess(guess) {
             const cleanWord = word.replace(/[^a-z0-9]/g, '');
             cleanWord.toLowerCase();
             
-            if (word == guess && !guessedWords.has(word))
-            {
+            // Check exact match with original word
+            if (word === guess && !guessedWords.has(word)) {
                 guessedWords.add(word);
                 foundMatch = true;
                 score++;
                 displayScore(score, totalWords);
             }
-            if (cleanWord === guess && !guessedWords.has(cleanWord)) {
+            // Check exact match with cleaned word
+            else if (cleanWord === guess && !guessedWords.has(cleanWord)) {
+                guessedWords.add(cleanWord);
+                foundMatch = true;
+                score++;
+                displayScore(score, totalWords);
+            }
+            // Check if guess is a synonym of the word
+            else if (hasSimilar(guess, cleanWord) && !guessedWords.has(cleanWord)) {
                 guessedWords.add(cleanWord);
                 foundMatch = true;
                 score++;
@@ -240,6 +259,28 @@ function calculateTotalWords(lyrics) {
     });
     
     return uniqueWords.size;
+}
+
+function hasSimilar(guess, targetWord) {
+    // Clean the target word
+    const cleanTarget = targetWord.replace(/[^a-z0-9]/g, '').toLowerCase();
+    const cleanGuess = guess.toLowerCase();
+    
+    // Check each synonym group
+    for (const synonymGroup of synonyms) {
+        const mainWord = synonymGroup.word.toLowerCase();
+        const similarWords = synonymGroup.sim.map(s => s.toLowerCase());
+        
+        // If the target word is the main word or one of its variants
+        if (cleanTarget === mainWord || similarWords.includes(cleanTarget)) {
+            // Check if the guess matches any variant in this group
+            if (cleanGuess === mainWord || similarWords.includes(cleanGuess)) {
+                return true;
+            }
+        }
+    }
+    
+    return false;
 }
 
 function resetGame() {

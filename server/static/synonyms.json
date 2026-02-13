@@ -1,0 +1,19 @@
+[
+    
+    {
+        "word": "there",
+        "sim": ["their", "theyre"]
+    },
+    {
+        "word": "oh",
+        "sim": ["o", "ohh", "ooh", "ohhh"]
+    },
+    {
+        "word": "your",
+        "sim": ["youre"]
+    },
+    {
+        "word": "mhm",
+        "sim": ["mmhmm", "mmhm", "mhmhmm", "mhmm"]
+    }
+]
