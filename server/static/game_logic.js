@@ -40,7 +40,7 @@ async function initGame() {
     
     // Load synonyms
     try {
-        const response = await fetch('./synonyms.json');
+        const response = await fetch('static/synonyms.json');
         synonyms = await response.json();
     } catch (error) {
         console.error('Error loading synonyms:', error);
@@ -182,6 +182,7 @@ function checkGuess(guess) {
             }
             // Check if guess is a synonym of the word
             else if (hasSimilar(guess, cleanWord) && !guessedWords.has(cleanWord)) {
+                console.log("Found similar word: " + cleanWord + " for guess: " + guess);
                 guessedWords.add(cleanWord);
                 foundMatch = true;
                 score++;
