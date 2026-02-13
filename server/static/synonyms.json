@@ -15,5 +15,9 @@
     {
         "word": "mhm",
         "sim": ["mmhmm", "mmhm", "mhmhmm", "mhmm"]
+    },
+    {
+        "word": "DUSSÉ",
+        "sim": ["dusse"]
     }
 ]
