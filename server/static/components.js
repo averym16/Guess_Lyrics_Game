@@ -164,9 +164,9 @@ export function revealHiddenLyrics(guessedWords)
     cells.forEach(cell => {
         const cleanWord = cell.dataset.word
             .toLowerCase()
-            .replace(/[^a-z]/g, '');
+            .replace(/[^a-z0-9]/g, '');
 
-        if ( !guessedWords.has(cleanWord) ){
+        if ( !guessedWords.has(cleanWord) && !guessedWords.has(cell.dataset.word) ){
             cell.textContent = cell.dataset.word;
             cell.style.color = 'red';
         }
@@ -188,7 +188,7 @@ export function buildTable(lyrics) {
         td.dataset.word = lyrics[i];
         trow.appendChild(td);
 
-        // Every 4 words, finish the row
+        // Every 10 words, finish the row
         if ((i + 1) % 10 === 0) {
             tbody.appendChild(trow);
             trow = document.createElement('tr');
