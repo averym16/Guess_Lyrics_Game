@@ -149,7 +149,7 @@ export function renderLyrics(guessedWords) {
     cells.forEach(cell => {
         const cleanWord = cell.dataset.word
             .toLowerCase()
-            .replace(/[^a-z0-9]/g, '');
+            .replace(/[^a-z0-9$]/g, '');
 
         cell.textContent = guessedWords.has(cleanWord)
             ? cell.dataset.word
@@ -164,7 +164,7 @@ export function revealHiddenLyrics(guessedWords)
     cells.forEach(cell => {
         const cleanWord = cell.dataset.word
             .toLowerCase()
-            .replace(/[^a-z0-9]/g, '');
+            .replace(/[^a-z0-9$]/g, '');
 
         if ( !guessedWords.has(cleanWord) && !guessedWords.has(cell.dataset.word) ){
             cell.textContent = cell.dataset.word;

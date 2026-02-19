@@ -18,12 +18,12 @@ def valid(words):
             parts = word.split('-')
             for part in parts:
                 # Clean each part and add if not empty
-                cleaned = ''.join(char for char in part if char.isalnum())
+                cleaned = ''.join(char for char in part if char.isalnum() or char == '$')
                 if cleaned:
                     result.append(cleaned)
         else:
             # Clean the word and add if not empty
-            cleaned = ''.join(char for char in word if char.isalnum())
+            cleaned = ''.join(char for char in word if char.isalnum() or char == '$')
             if cleaned:
                 result.append(cleaned)
     

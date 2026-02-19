@@ -14,7 +14,7 @@
     },
     {
         "word": "mhm",
-        "sim": ["mmhmm", "mmhm", "mhmhmm", "mhmm"]
+        "sim": ["mmhmm", "mmhm", "mhmhmm", "mhmm", "mm", "mmm"]
     },
     {
         "word": "dusse",
@@ -31,5 +31,30 @@
     {
         "word": "to",
         "sim": ["too"]
+    },
+    {
+        "word": "ok",
+        "sim": ["okay", "okey", "kay"]
+    },
+    {
+        "word": "theres",
+        "sim": ["theirs", "theyres"]
+    },
+    {
+        "word": "yeah",
+        "sim": ["yea", "yep", "yup", "yeahh", "yeaa", "yeaaah", "yeaaa", "yeaaaah"]
+    },
+    {
+        "word": "cause",
+        "sim": ["because", "cuz", "cos", "coz"]
+    },
+    {
+        "word": "ay",
+        "sim": ["aye", "ai", "ayyy", "ayy", "ayyyye", "ayyyyeee"]
+    },
+    {
+        "word": "fuckin",
+        "sim": ["fucking", "fukin", "fckin", "fckn"]
     }
+        
 ]

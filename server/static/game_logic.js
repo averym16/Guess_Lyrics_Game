@@ -163,7 +163,7 @@ function checkGuess(guess) {
     currentLyrics.forEach(lyric => {
         const words = lyric.toLowerCase().split(' ');
         words.forEach(word => {
-            const cleanWord = word.replace(/[^a-z0-9]/g, '');
+            const cleanWord = word.replace(/[^a-z0-9$]/g, '');
             cleanWord.toLowerCase();
             
             // Check exact match with original word
@@ -254,7 +254,7 @@ function calculateTotalWords(lyrics) {
     
     lyrics.forEach(lyric => {
         lyric.toLowerCase().split(' ').forEach(word => {
-            const cleanWord = word.replace(/[^a-z]/g, '');
+            const cleanWord = word.replace(/[^a-z0-9$]/g, '');
             if (cleanWord) uniqueWords.add(cleanWord);
         });
     });
@@ -264,7 +264,7 @@ function calculateTotalWords(lyrics) {
 
 function hasSimilar(guess, targetWord) {
     // Clean the target word
-    const cleanTarget = targetWord.replace(/[^a-z0-9]/g, '').toLowerCase();
+    const cleanTarget = targetWord.replace(/[^a-z0-9$]/g, '').toLowerCase();
     const cleanGuess = guess.toLowerCase();
     
     // Check each synonym group
