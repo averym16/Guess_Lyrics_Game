@@ -55,6 +55,18 @@
     {
         "word": "fuckin",
         "sim": ["fucking", "fukin", "fckin", "fckn"]
+    },
+    {  
+        "word": "muthafuckin",
+        "sim": ["muthafucking", "muthafukin", "motherfucking", "motherfucking", "motherfukin"]
+    },
+    {
+        "word": "woah",
+        "sim": ["whoa", "woaa", "woaaa", "woaaaa"]
+    },
+    {
+        "word": "want",
+        "sim": ["wanna", "wannt", "wanntt"]
     }
         
 ]

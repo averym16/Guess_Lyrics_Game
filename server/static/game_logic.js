@@ -115,7 +115,8 @@ async function handleGameStart(e) {
         renderLyrics(guessedWords);
         showGameSection();
         displayScore(0, totalWords);
-        
+        document.getElementById('lyrics').scrollTop = 0;
+
         // Start timer
         if (!startTimer()) {
             alert('Please set a timer duration');
