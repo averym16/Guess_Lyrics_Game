@@ -157,12 +157,12 @@ function handleGuessInput(e) {
         if (checkWin()) {
             setTimeout(() => {
                 handleGameWin();
-            }, 300);
+            }, 500);
         }
     } else {
         // Optional: only show feedback if the guess is "complete"
         e.target.classList.add('wrong-guess');
-        setTimeout(() => e.target.classList.remove('wrong-guess'), 500);
+        setTimeout(() => e.target.classList.remove('wrong-guess'), 300);
     }
 }
 
