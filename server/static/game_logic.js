@@ -33,6 +33,7 @@ let totalWords = 0;
 let library = {};
 let artists = {};
 let synonyms = [];
+let sameArtist = false;
 
 // ==================== INITIALIZATION ====================
 async function initGame() {
@@ -221,8 +222,10 @@ function handleGameWin() {
     `;
     
     alert(message);
-        // Optional: Ask if they want to play again
-    if (confirm('Play another song?')) {
+    
+    // Optional: Ask if they want to play again with the same artist
+    if (confirm('Play another song with same artist?')) {
+        sameArtist = true;
         resetGame();
     }
    
@@ -246,6 +249,12 @@ function handleTimerEnd() {
 function handleResetGame(){
     if (confirm('Are you sure you want to reset the game?')) {
         stopTimer();
+        if (confirm('Do you want to play again with the same artist?')) {
+            sameArtist = true;
+        }
+        else{
+            sameArtist = false;
+        }
         resetGame();
     }
 }
@@ -297,19 +306,25 @@ function resetGame() {
     // Reset game state
     currentSong = null;
     currentLyrics = [];
-    currentArtist = null;
+    currentArtist = sameArtist ? currentArtist : null;
     guessedWords.clear();
     score = 0;
     totalWords = 0;
     
     // Reset UI
     hideGameSection();
-    document.getElementById('artist').innerHTML =  '<option value="random">Random</option>';
+    document.getElementById('artist').innerHTML =  sameArtist ? `<option value="${currentArtist}">${currentArtist}</option>` : '<option value="random">Random</option>';
     document.getElementById('song').innerHTML =  '<option value="random">Random</option>';
     document.getElementById('gameinput').value = '';
     document.getElementById('lyrics-table').innerHTML='';
     document.getElementById('header').innerText = 'Guess The Lyrics';
-    loadArtists(artists);
+    if(sameArtist) {
+        loadSongs();
+    }
+
+    else {
+        loadArtists(artists);
+    }
     resetTimer();
    
     
