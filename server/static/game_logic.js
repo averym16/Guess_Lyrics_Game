@@ -155,12 +155,14 @@ function handleGuessInput(e) {
         renderLyrics(guessedWords);
 
         if (checkWin()) {
-            handleGameWin();
+            setTimeout(() => {
+                handleGameWin();
+            }, 300);
         }
     } else {
         // Optional: only show feedback if the guess is "complete"
         e.target.classList.add('wrong-guess');
-        setTimeout(() => e.target.classList.remove('wrong-guess'), 300);
+        setTimeout(() => e.target.classList.remove('wrong-guess'), 500);
     }
 }
 
@@ -219,11 +221,11 @@ function handleGameWin() {
     `;
     
     alert(message);
-    
-    // Optional: Ask if they want to play again
+        // Optional: Ask if they want to play again
     if (confirm('Play another song?')) {
         resetGame();
     }
+   
 }
 
 function handleTimerEnd() {
