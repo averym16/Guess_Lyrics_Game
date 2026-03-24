@@ -138,6 +138,12 @@ async function handleGameStart(e) {
 
 // ==================== GUESS HANDLING ====================
 function handleGuessInput(e) {
+
+    if (e.key == 'Enter') {
+        e.target.value = ''; // clear input on Enter
+        return;
+    }
+
     const guess = e.target.value.trim().toLowerCase();
 
     if (!guess) return;
