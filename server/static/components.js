@@ -63,11 +63,27 @@ export function startTimer() {
 export function pauseTimer() {
     isPaused = !isPaused;
     const pauseBtn = document.getElementById('pauseBtn');
+    const continueBtn = document.getElementById('continueBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const resetBtn = document.getElementById('resetBtn');
     const guessinput = document.getElementById('gameinput');
     const lyrics_table = document.getElementById('lyrics');
     lyrics_table.style.filter = isPaused ? 'blur(5px)' : 'none';
     guessinput.disabled = isPaused;
-    pauseBtn.textContent = isPaused ? 'Continue' : 'Pause';
+
+    if (isPaused) {
+        pauseBtn.textContent = 'Continue';
+        pauseBtn.setAttribute('id', 'continueBtn');
+        stopBtn.style.display = 'none';
+        resetBtn.style.display = 'none';
+    }
+    else {
+        continueBtn.textContent = 'Pause';
+        continueBtn.setAttribute('id', 'pauseBtn');
+        stopBtn.style.display = 'inline-block';
+        resetBtn.style.display = 'inline-block';
+    }
+   
 }
 
 export function stopTimer() {
@@ -208,7 +224,8 @@ export function buildTable(lyrics) {
 }
 
 export function loadArtists(artists){
-    const artist_list = document.getElementById('artist');
+    const artist_list =  document.getElementById('artist');
+    
     artists.forEach(item => {
         const option_artist = document.createElement('option');
         option_artist.textContent = item.artist;

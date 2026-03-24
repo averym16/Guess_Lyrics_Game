@@ -204,6 +204,18 @@ button:disabled {
     border-color: var(--primary-color);
 }
 
+#continueBtn {
+    background: var(--success-color);
+    color: var(--text-primary);
+    border: 2px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+}
+
+#continueBtn:hover {
+    background: var(--success-color);
+    border-color: var(--primary-color);
+}
+
 /* ==================== INPUTS ==================== */
 input[type="text"],
 input[type="number"],

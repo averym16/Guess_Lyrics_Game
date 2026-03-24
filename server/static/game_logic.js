@@ -34,6 +34,7 @@ let library = {};
 let artists = {};
 let synonyms = [];
 let sameArtist = false;
+let random = false;
 
 // ==================== INITIALIZATION ====================
 async function initGame() {
@@ -50,11 +51,14 @@ async function initGame() {
     
     // Initialize UI components 
     initComponents();
+
+     if ( document.getElementById('home_header') !== null) return;
     loadArtists(artists);
     // Set up event listeners
     const form = document.getElementById('selection');
     const guessInput = document.getElementById('gameinput');
     const startBtn = document.getElementById('startBtn');
+    const continueBtn = document.getElementById('continueBtn');
     const pauseBtn = document.getElementById('pauseBtn');
     const stopBtn = document.getElementById('stopBtn');
     const resetBtn = document.getElementById('resetBtn');
@@ -91,13 +95,16 @@ async function handleGameStart(e) {
         if ((!artist && !song) || artist === "random"  ) {
             currentSong = await getRandomSong();
             document.getElementById('header').innerText = 'Random Song';
+            random = true;
         } else if (artist && song === 'random')
         {
             currentSong = await getRandSong_ByArtist(artist);
             document.getElementById('header').innerText = artist + ' - Random Song';
+            random = false;
         } else if (artist && song) {
             currentSong = await getSong(artist, song);
             document.getElementById('header').innerText = artist + '-' + song;
+            random = false;
         } else {
             alert('Please provide both artist and song, or leave both empty for random');
             return;
@@ -224,7 +231,7 @@ function handleGameWin() {
     alert(message);
     
     // Optional: Ask if they want to play again with the same artist
-    if (confirm('Play another song with same artist?')) {
+    if ( !random && confirm('Play another song with same artist?')) {
         sameArtist = true;
         resetGame();
     }
@@ -244,12 +251,36 @@ function handleTimerEnd() {
     
     alert(message);
     revealHiddenLyrics(guessedWords);
+    continueButtonHandler(false);
+   
 }
+
+function continueButtonHandler(reset) {
+    const pauseBtn = document.getElementById('pauseBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const contBtn = document.getElementById('continueBtn');
+  
+    if (reset){
+        contBtn.textContent = 'Reset';
+        contBtn.setAttribute('id', 'resetBtn');
+        stopBtn.style.display = 'inline-block';
+        pauseBtn.style.display = 'inline-block';
+    }
+    else{
+        resetBtn.textContent = 'Continue';
+        resetBtn.setAttribute('id', 'continueBtn');
+        stopBtn.style.display = 'none';
+        pauseBtn.style.display = 'none';
+    }
+}
+
+
 
 function handleResetGame(){
     if (confirm('Are you sure you want to reset the game?')) {
         stopTimer();
-        if (confirm('Do you want to play again with the same artist?')) {
+        if (!random && confirm('Do you want to play again with the same artist?')) {
             sameArtist = true;
         }
         else{
@@ -310,6 +341,7 @@ function resetGame() {
     guessedWords.clear();
     score = 0;
     totalWords = 0;
+    continueButtonHandler(true);
     
     // Reset UI
     hideGameSection();
