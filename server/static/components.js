@@ -63,7 +63,11 @@ export function startTimer() {
 export function pauseTimer() {
     isPaused = !isPaused;
     const pauseBtn = document.getElementById('pauseBtn');
-    pauseBtn.textContent = isPaused ? 'Resume' : 'Pause';
+    const guessinput = document.getElementById('gameinput');
+    const lyrics_table = document.getElementById('lyrics');
+    lyrics_table.style.filter = isPaused ? 'blur(5px)' : 'none';
+    guessinput.disabled = isPaused;
+    pauseBtn.textContent = isPaused ? 'Continue' : 'Pause';
 }
 
 export function stopTimer() {
