@@ -49,12 +49,20 @@ def seed():
                 db.session.flush()
 
             # Fixed: Assign the song to a variable so we can use song.id later
-            song = Song(title=item["title"], artist_id=artist.id)
-            db.session.add(song)
-            db.session.flush()  # get song.id
+        
             
             words = item["lyrics"].split()
             valid_words = valid(words)
+            length = len(valid_words)
+
+            # Set timer values based on the number of valid words
+
+            song = Song(title=item["title"], artist_id=artist.id, timer_normal=length * 3, timer_challenge=length * 2)
+
+            db.session.add(song)
+            db.session.flush()  # get song.id
+            
+
             for word in valid_words:
                 db.session.add(
                     Lyric(song_id=song.id, lyric=word)

@@ -341,7 +341,9 @@ function resetGame() {
     guessedWords.clear();
     score = 0;
     totalWords = 0;
-    continueButtonHandler(true);
+    if(document.getElementById('continueBtn') !== null) {
+        continueButtonHandler(true);
+    }
     
     // Reset UI
     hideGameSection();
