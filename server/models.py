@@ -30,7 +30,9 @@ class Song(db.Model):
     id: Mapped[Integer] = mapped_column(Integer, primary_key=True, autoincrement=True)
     title: Mapped[str] = mapped_column(String, nullable=False)
     artist_id: Mapped[int] = mapped_column(Integer, ForeignKey("artists.id"), nullable=False)
-    
+    timer_normal: Mapped[int] = mapped_column(Integer, nullable=False)
+    timer_challenge: Mapped[int] = mapped_column(Integer, nullable=False)
+
     #Relationships
     lyrics: Mapped[list["Lyric"]] = relationship(back_populates="song", lazy="selectin")
     artist: Mapped["Artist"] = relationship(back_populates="songs")

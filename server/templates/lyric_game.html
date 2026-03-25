@@ -11,7 +11,9 @@
         <nav id="navbar"></nav>
         <main>
             <header>
-                <h1 name="home" class="home" id="header">Guess The Lyrics</h1>
+                <div class="hero">
+                    <h1 id="header">Guess The Lyrics</h1>
+                </div>
             </header>
            <section class="game-settings" id="settings" style="display: block">
             <form id="selection">
@@ -29,29 +31,16 @@
                             <option value="random">Random</option>
                         </select>   
                     </div>
-                    
-                    <div class="form-group">
-                        <div class="timer-inputs">
-                            <div class="timer-field">
-                                <label for="minutesInput">Minutes:</label>
-                                <input type="number" id="minutesInput" min="0" value="0">
-                            </div>
-                            <div class="timer-field">
-                                <label for="secondsInput">Seconds:</label>
-                                <input type="number" id="secondsInput" min="0" max="59" value="0">
-                            </div>
-                        </div>
-                    </div>
+                     <button type="submit" id="startBtn">Start Game</button>
                 </div>
-                
-                <button type="submit" id="startBtn">Start Game</button>
+               
             </form>
         </section>
+        
             <section id="instructions" style="display: block">
-                <h2>How To Play</h2>
-                <p id="bold">To start the game make sure you set the Timer!!!</p>
+                <h2>How To Start</h2>
                 <ul id="instruction_list">
-                    <li>To Guess Lyrics for a random Song: Just set the timer and hit Start Game!</li>
+                    <li>To Guess Lyrics for a random Song: Just hit Start Game!</li>
                     <li>To Guess Lyrics for a random Song, but for a specific Artist: Just select the artist, and hit Start Game!</li>
                     <li>To Guess Lyrics for a specific Song: Select both the artist and the song and hit Start Game!</li>
                 </ul>

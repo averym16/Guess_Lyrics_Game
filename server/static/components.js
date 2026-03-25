@@ -21,17 +21,13 @@ export function initTimer() {
     // You'll trigger startTimer from game_logic.js when game actually starts
 }
 
-export function startTimer() {
+export function startTimer(timerValue) {
     clearInterval(countdown);
     isPaused = false;
     
-    const minutesInput = document.getElementById('minutesInput');
-    const secondsInput = document.getElementById('secondsInput');
     const display = document.getElementById('display');
     
-    const minutes = parseInt(minutesInput.value) || 0;
-    const seconds = parseInt(secondsInput.value) || 0;
-    timeLeft = (minutes * 60) + seconds;
+    timeLeft = timerValue;
     
     if (timeLeft <= 0) {
         return false;
@@ -99,8 +95,6 @@ export function stopTimer() {
 
 export function resetTimer() {
     stopTimer();
-    document.getElementById('minutesInput').value = 0;
-    document.getElementById('secondsInput').value = 0;
 }
 
 // Callback when timer ends (game_logic will set this)

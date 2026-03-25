@@ -64,7 +64,6 @@ async function initGame() {
     const resetBtn = document.getElementById('resetBtn');
     const artist_select = document.getElementById('artist');
 
-
     artist_select.addEventListener('change', loadSongs);
     
 
@@ -89,6 +88,7 @@ async function handleGameStart(e) {
     
     const artist = document.getElementById('artist').value.trim();
     const song = document.getElementById('song').value.trim();
+    let timer_normal = 0;
     
     try {
         // Fetch song from API
@@ -103,7 +103,7 @@ async function handleGameStart(e) {
             random = false;
         } else if (artist && song) {
             currentSong = await getSong(artist, song);
-            document.getElementById('header').innerText = artist + '-' + song;
+            document.getElementById('header').innerText = artist + ' - ' + song;
             random = false;
         } else {
             alert('Please provide both artist and song, or leave both empty for random');
@@ -114,6 +114,9 @@ async function handleGameStart(e) {
         currentLyrics = currentSong.lyrics;
         guessedWords.clear();
         score = 0;
+
+        //Get time for song
+        timer_normal = currentSong.timer_normal; // Set time based on song's timer value
         
         // Calculate total unique words
         totalWords = calculateTotalWords(currentLyrics);
@@ -126,9 +129,7 @@ async function handleGameStart(e) {
         document.getElementById('lyrics').scrollTop = 0;
 
         // Start timer
-        if (!startTimer()) {
-            alert('Please set a timer duration');
-            
+        if (!startTimer(timer_normal)) {
             resetGame();
             return;
         }
@@ -341,7 +342,9 @@ function resetGame() {
     guessedWords.clear();
     score = 0;
     totalWords = 0;
-    continueButtonHandler(true);
+    if(document.getElementById('continueBtn') !== null) {
+        continueButtonHandler(true);
+    }
     
     // Reset UI
     hideGameSection();
