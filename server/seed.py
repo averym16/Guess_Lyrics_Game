@@ -53,7 +53,7 @@ def seed():
             
             words = item["lyrics"].split()
             valid_words = valid(words)
-            length = len(valid_words)
+            length = len(set(valid_words))
 
             # Set timer values based on the number of valid words
 
