@@ -64,7 +64,6 @@ async function initGame() {
     const resetBtn = document.getElementById('resetBtn');
     const artist_select = document.getElementById('artist');
 
-
     artist_select.addEventListener('change', loadSongs);
     
 
@@ -114,6 +113,9 @@ async function handleGameStart(e) {
         currentLyrics = currentSong.lyrics;
         guessedWords.clear();
         score = 0;
+
+        //Get time for song
+        timer_normal = currentSong.timer_normal; // Set time based on song's timer value
         
         // Calculate total unique words
         totalWords = calculateTotalWords(currentLyrics);
@@ -126,9 +128,7 @@ async function handleGameStart(e) {
         document.getElementById('lyrics').scrollTop = 0;
 
         // Start timer
-        if (!startTimer()) {
-            alert('Please set a timer duration');
-            
+        if (!startTimer(timer_normal)) {
             resetGame();
             return;
         }
