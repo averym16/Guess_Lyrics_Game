@@ -14,9 +14,6 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app)
 migrate = Migrate(app, db)
 
-with app.app_context():
-    db.create_all()
-
 @app.get("/")
 def index():
     return render_template("index.html")
@@ -40,8 +37,8 @@ def random_song():
         "artist": song.artist.name,  # Fixed: Access artist name through relationship
         "song": song.title,
         "lyrics": [lyric.lyric for lyric in song.lyrics],
-        "timer_normal": result.timer_normal,
-        "timer_challenge": result.timer_challenge
+        "timer_normal": song.timer_normal,
+        "timer_challenge": song.timer_challenge
     })
 
 @app.get("/api/library")
@@ -142,8 +139,8 @@ def get_random_song_by_artist():
         "artist": artist.name,
         "song": random_song.title,
         "lyrics": [lyric.lyric for lyric in random_song.lyrics],
-        "timer_normal": result.timer_normal,
-        "timer_challenge": result.timer_challenge
+        "timer_normal": random_song.timer_normal,
+        "timer_challenge": random_song.timer_challenge
 
     })
 
