@@ -1,10 +1,16 @@
 /* ==================== GAME PAGE STYLES ==================== */
 
 /* Game Settings Form */
+
 .game-settings {
     background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(139, 92, 246, 0.05));
     padding: 1.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 2.5rem;
+    max-width: 900px;
+    margin: 0 auto 2rem;
+    border-radius: 1.25rem;
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(10px);
 }
 
 .game-settings form {
@@ -20,11 +26,22 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
     margin-bottom: 1.5rem;
+    grid-template-columns: 1fr 1fr auto;
+    align-items: end;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
+}
+.form-group label {
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+select:hover {
+    transform: translateY(-1px);
 }
 
 .form-group > label {
@@ -66,10 +83,30 @@
 }
 
 #startBtn {
-    width: 100%;
+   
     padding: 1rem 2rem;
-    font-size: 1rem;
+    font-size: 1.1rem;
+    height: 48px;
 }
+
+#startBtn {
+    position: relative;
+    overflow: hidden;
+}
+
+#startBtn::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+    opacity: 0;
+    transition: var(--transition);
+}
+
+#startBtn:hover::after {
+    opacity: 1;
+}
+
 
 /* Options Section (Song List) */
 #options {

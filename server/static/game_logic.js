@@ -103,7 +103,7 @@ async function handleGameStart(e) {
             random = false;
         } else if (artist && song) {
             currentSong = await getSong(artist, song);
-            document.getElementById('header').innerText = artist + '-' + song;
+            document.getElementById('header').innerText = artist + ' - ' + song;
             random = false;
         } else {
             alert('Please provide both artist and song, or leave both empty for random');
