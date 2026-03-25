@@ -57,7 +57,7 @@ def seed():
 
             # Set timer values based on the number of valid words
 
-            song = Song(title=item["title"], artist_id=artist.id, timer_normal=length * 3, timer_challenge=length * 2)
+            song = Song(title=item["title"], artist_id=artist.id, timer_normal=length * 2.5, timer_challenge=length * 2)
 
             db.session.add(song)
             db.session.flush()  # get song.id
