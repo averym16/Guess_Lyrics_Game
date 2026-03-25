@@ -88,6 +88,7 @@ async function handleGameStart(e) {
     
     const artist = document.getElementById('artist').value.trim();
     const song = document.getElementById('song').value.trim();
+    let timer_normal = 0;
     
     try {
         // Fetch song from API

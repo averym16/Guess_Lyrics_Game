@@ -95,8 +95,6 @@ export function stopTimer() {
 
 export function resetTimer() {
     stopTimer();
-    document.getElementById('minutesInput').value = 0;
-    document.getElementById('secondsInput').value = 0;
 }
 
 // Callback when timer ends (game_logic will set this)
