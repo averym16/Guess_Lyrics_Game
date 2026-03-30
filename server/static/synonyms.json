@@ -67,6 +67,18 @@
     {
         "word": "want",
         "sim": ["wanna", "wannt", "wanntt"]
+    },
+    {
+        "word": "got",
+        "sim": ["gotta", "gottt", "gotttt"]
+    },
+    {
+        "word": "prolly",
+        "sim": ["probably", "prollyy", "prollyyy"]
+    },
+    {
+        "word": "gonna",
+        "sim": ["gon", "gonn", "gonnaa", "gonnaaa", "going"]
     }
         
 ]

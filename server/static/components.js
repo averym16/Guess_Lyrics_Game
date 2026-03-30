@@ -149,7 +149,7 @@ export function loadFooter() {
         </section>
         <section id="footer_misc">
         <ul id="footer_misc_list">
-            <li>Last Updated: 02/11/2026</li>
+            <li>Last Updated: 03/25/2026</li>
             <li>Licensed by <a href="https://github.com/averym16/Guess_Lyrics_Game/blob/main/LICENSE">MIT</a></li>
         </ul>
     </section>
