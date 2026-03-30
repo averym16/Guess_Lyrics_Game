@@ -106,7 +106,6 @@ async function handleGameStart(e) {
             document.getElementById('header').innerText = artist + ' - ' + song;
             random = false;
         } else {
-            alert('Please provide both artist and song, or leave both empty for random');
             return;
         }
         
@@ -143,7 +142,7 @@ async function handleGameStart(e) {
         console.log(`Game started`);
         
     } catch (error) {
-        alert('Song not found. Please try again.');
+        handleError('Song not found. Please try again.');
         console.error('Error starting game:', error);
     }
 }
@@ -255,8 +254,6 @@ function continueButtonHandler(reset) {
     }
 }
 
-
-
 function handleResetGame(){
     gameActive = false;
     stopTimer();    
@@ -342,6 +339,48 @@ async function loadSongs(){
     currentArtist = document.getElementById('artist').value;
     const songs_by_artist = await getSongs_ByArtist(currentArtist);
     loadSongsByArtist(songs_by_artist);
+}
+
+function handleError(message) {
+    const container = document.getElementById("toastContainer");
+
+    const toast = document.createElement("div");
+    toast.className = "toast toast-error";
+
+    // Create message span
+    const text = document.createElement("span");
+    text.textContent = message;
+
+    // Create close button
+    const closeBtn = document.createElement("span");
+    closeBtn.className = "toast-close";
+    closeBtn.innerHTML = "&times;";
+
+    // Add both to toast
+    toast.appendChild(text);
+    toast.appendChild(closeBtn);
+
+    container.appendChild(toast);
+
+    // Animate in
+    setTimeout(() => {
+        toast.classList.add("show");
+    }, 10);
+
+    // Manual close
+    closeBtn.addEventListener('click', () => {
+        removeToast(toast);
+    });
+
+    // Auto remove
+    setTimeout(() => {
+        removeToast(toast);
+    }, 3000);
+}
+
+function removeToast(toast) {
+    toast.classList.remove("show");
+    setTimeout(() => toast.remove(), 300);
 }
 
 function handlePopup(type){
