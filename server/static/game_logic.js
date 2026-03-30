@@ -30,14 +30,16 @@ let guessedWords = new Set();
 let score = 0;
 let currentArtist = null;
 let totalWords = 0;
-let library = {};
 let artists = {};
 let synonyms = [];
 let sameArtist = false;
 let random = false;
+let gameActive = false;
 
 // ==================== INITIALIZATION ====================
 async function initGame() {
+
+    handlePopup(0); // Ensure popup is hidden on start
     artists = await getArtists();
     
     // Load synonyms
@@ -57,12 +59,10 @@ async function initGame() {
     // Set up event listeners
     const form = document.getElementById('selection');
     const guessInput = document.getElementById('gameinput');
-    const startBtn = document.getElementById('startBtn');
-    const continueBtn = document.getElementById('continueBtn');
     const pauseBtn = document.getElementById('pauseBtn');
     const stopBtn = document.getElementById('stopBtn');
     const resetBtn = document.getElementById('resetBtn');
-    const artist_select = document.getElementById('artist');
+    const artist_select = document.getElementById('artist');// Get the elements
 
     artist_select.addEventListener('change', loadSongs);
     
@@ -75,11 +75,11 @@ async function initGame() {
     
     // Timer controls
     pauseBtn.addEventListener('click', pauseTimer);
-    stopBtn.addEventListener('click', handleStopGame);
-    resetBtn.addEventListener('click', handleResetGame);
+    stopBtn.addEventListener('click', () =>handlePopup(3));
+    resetBtn.addEventListener('click', () =>handlePopup(1));
     
     // Set callback for when timer ends
-    setTimerEndCallback(handleTimerEnd);
+    setTimerEndCallback(() =>handlePopup(4));
 }
 
 // ==================== GAME START ====================
@@ -106,7 +106,6 @@ async function handleGameStart(e) {
             document.getElementById('header').innerText = artist + ' - ' + song;
             random = false;
         } else {
-            alert('Please provide both artist and song, or leave both empty for random');
             return;
         }
         
@@ -131,8 +130,11 @@ async function handleGameStart(e) {
         // Start timer
         if (!startTimer(timer_normal)) {
             resetGame();
+            gameActive = false;
             return;
         }
+
+        gameActive = true;
         
         // Focus on guess input
         document.getElementById('gameinput').focus();
@@ -140,7 +142,7 @@ async function handleGameStart(e) {
         console.log(`Game started`);
         
     } catch (error) {
-        alert('Song not found. Please try again.');
+        handleError('Song not found. Please try again.');
         console.error('Error starting game:', error);
     }
 }
@@ -165,7 +167,7 @@ function handleGuessInput(e) {
 
         if (checkWin()) {
             setTimeout(() => {
-                handleGameWin();
+                handlePopup(5);
             }, 500);
         }
     } else {
@@ -219,39 +221,15 @@ function checkWin() {
 
 function handleGameWin() {
     stopTimer();
-    
-    const message = `
-        🎉 Congratulations! 🎉
-        You guessed all the lyrics!
-        
-        Song: "${currentSong.song}"
-        Artist: ${currentSong.artist}
-        Score: ${score}/${totalWords}
-    `;
-    
-    alert(message);
-    
+    gameActive = false;
     // Optional: Ask if they want to play again with the same artist
-    if ( !random && confirm('Play another song with same artist?')) {
-        sameArtist = true;
-        resetGame();
-    }
+    if ( !random ) handlePopup(2);
    
 }
 
 function handleTimerEnd() {
-    const message = `
-        ⏰ Time's Up! ⏰
-        
-        Song: "${currentSong.song}"
-        Artist: ${currentSong.artist}
-        Score: ${score}/${totalWords}
-        
-        Better luck next time!
-    `;
-    
-    alert(message);
     revealHiddenLyrics(guessedWords);
+    gameActive = false;
     continueButtonHandler(false);
    
 }
@@ -276,26 +254,17 @@ function continueButtonHandler(reset) {
     }
 }
 
-
-
 function handleResetGame(){
-    if (confirm('Are you sure you want to reset the game?')) {
-        stopTimer();
-        if (!random && confirm('Do you want to play again with the same artist?')) {
-            sameArtist = true;
-        }
-        else{
-            sameArtist = false;
-        }
-        resetGame();
-    }
+    gameActive = false;
+    stopTimer();    
+    if ( !random ) handlePopup(2);
+    else resetGame();
 }
 
 function handleStopGame() {
-    if (confirm('Are you sure you want to give up?\nTHIS WILL STOP TIMER AND REVEAL ALL LYRICS!!!!')) {
+        gameActive = false;
         stopTimer();
         handleTimerEnd();
-    }
 }
 
 // ==================== HELPER FUNCTIONS ====================
@@ -372,6 +341,186 @@ async function loadSongs(){
     loadSongsByArtist(songs_by_artist);
 }
 
+function handleError(message) {
+    const container = document.getElementById("toastContainer");
+
+    const toast = document.createElement("div");
+    toast.className = "toast toast-error";
+
+    // Create message span
+    const text = document.createElement("span");
+    text.textContent = message;
+
+    // Create close button
+    const closeBtn = document.createElement("span");
+    closeBtn.className = "toast-close";
+    closeBtn.innerHTML = "&times;";
+
+    // Add both to toast
+    toast.appendChild(text);
+    toast.appendChild(closeBtn);
+
+    container.appendChild(toast);
+
+    // Animate in
+    setTimeout(() => {
+        toast.classList.add("show");
+    }, 10);
+
+    // Manual close
+    closeBtn.addEventListener('click', () => {
+        removeToast(toast);
+    });
+
+    // Auto remove
+    setTimeout(() => {
+        removeToast(toast);
+    }, 3000);
+}
+
+function removeToast(toast) {
+    toast.classList.remove("show");
+    setTimeout(() => toast.remove(), 300);
+}
+
+function handlePopup(type){
+    const popupOverlay = document.getElementById("popupOverlay");
+    const popupContent = document.querySelector(".popup-content");
+    const closeBtn = document.querySelector(".popup-close");
+    const popupBtn = document.querySelector(".popup-btn");
+    const cancelBtn = document.querySelector(".cancel-btn");
+
+    if (popupOverlay === null || popupContent === null || closeBtn === null) {
+        console.error("Popup elements not found");
+        return;
+    }
+
+    //Close popup
+    if (type === 0) {
+        popupOverlay.classList.remove("active");
+        popupOverlay.style.display = "none";
+        return;
+    }
+
+    popupOverlay.style.display = "flex";
+    popupOverlay.classList.add("active");
+
+    if (type === 1) {
+        if (!gameActive) {
+            handlePopup(0);
+            handleResetGame();
+            return;
+        }
+        cancelBtn.style.display = 'inline-block';
+        const message = 'Are you sure you want to reset the game?';
+        popupContent.querySelector("p").textContent = message;
+        popupContent.querySelector("h2").textContent = "Reset Game?";
+        cancelBtn.innerHTML = 'No';
+        popupBtn.innerHTML = 'Yes';
+        popupBtn.onclick = function() {
+            handlePopup(0);
+            handleResetGame();
+        }
+        closeBtn.onclick = function() {
+            handlePopup(0);
+        }
+        cancelBtn.onclick = function() {
+            handlePopup(0);
+        }
+    }
+    else if (type === 2) {
+        cancelBtn.style.display = 'inline-block';
+        const message = 'Do you want to play another song with the same artist?';
+        popupContent.querySelector("p").textContent = message;
+        popupContent.querySelector("h2").textContent = "Continue?";
+        cancelBtn.innerHTML = 'No';
+        popupBtn.innerHTML = 'Yes';
+        popupBtn.onclick = function() {
+            handlePopup(0);
+            sameArtist = true;
+            resetGame();
+        }
+        cancelBtn.onclick = function() {
+            handlePopup(0);
+            sameArtist = false;
+            resetGame();
+        }
+        closeBtn.onclick = function() {
+            handlePopup(0);
+            sameArtist = false;
+            resetGame();
+        }
+    }
+    else if (type === 3) {
+        cancelBtn.style.display = 'inline-block';
+        popupContent.className = "popup-content"; // reset first
+        popupContent.classList.add("popup-danger");
+        const message = 'Are you sure you want to give up?\nTHIS WILL STOP TIMER AND REVEAL ALL LYRICS!!!!';
+        popupContent.querySelector("p").textContent = message;
+        popupContent.querySelector("h2").textContent = "Give Up?";
+        cancelBtn.innerHTML = 'No';
+        popupBtn.innerHTML = 'Yes';
+        popupBtn.onclick = function() {
+            handlePopup(0);
+            handleStopGame();
+        }
+        cancelBtn.onclick = function() {
+            handlePopup(0);
+        }
+        closeBtn.onclick = function() {
+            handlePopup(0);
+        }
+    }
+    else if (type === 4) {
+       cancelBtn.style.display = 'none';
+       popupContent.className = "popup-content"; // reset first
+       popupContent.classList.add("popup-time");
+       const message = `
+        ⏰ Time's Up! ⏰
+        ${score}/${totalWords} words correct!
+        
+        Song: "${currentSong.song}"
+        Artist: ${currentSong.artist}
+        
+        Better luck next time!
+        `;
+        popupContent.querySelector("p").textContent = message;
+        popupContent.querySelector("h2").textContent = "Play Again?";
+        popupBtn.innerHTML = 'Continue';
+        popupBtn.onclick = function() {
+            handlePopup(0);
+            handleTimerEnd();
+        }
+    }
+    else if (type === 5) { 
+        cancelBtn.style.display = 'none';
+        popupContent.className = "popup-content popup-win";
+        const message = `
+        🎉 Congratulations! 🎉
+        You guessed all the lyrics!
+        ${score}/${totalWords} words correct!
+        
+        Song: "${currentSong.song}"
+        Artist: ${currentSong.artist}
+        `;
+        popupContent.querySelector("p").textContent = message;
+        popupContent.querySelector("h2").textContent = "Congratulations!";
+        popupBtn.innerHTML = 'Continue';
+        popupBtn.onclick = function() {
+            handlePopup(0);
+            handleGameWin();
+        }
+    }
+}
+
 // ==================== START THE GAME ====================
 document.addEventListener('DOMContentLoaded', initGame);
 document.addEventListener('input', handleGuessInput);
+
+// Optional: Close the popup if the user clicks outside of the content
+window.addEventListener("click", function(event) {
+    const popupOverlay = document.getElementById("popupOverlay");
+    if (event.target === popupOverlay) {
+        handlePopup(0);
+    }
+});
