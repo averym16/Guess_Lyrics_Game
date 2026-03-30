@@ -226,7 +226,7 @@ function handleGameWin() {
     if ( !random ) handlePopup(2);
    
 }
-
+ 
 function handleTimerEnd() {
     revealHiddenLyrics(guessedWords);
     gameActive = false;
