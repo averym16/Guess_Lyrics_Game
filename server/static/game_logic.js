@@ -261,7 +261,7 @@ function handleResetGame(){
     gameActive = false;
     stopTimer();    
     if ( !random ) handlePopup(2);
-    resetGame();
+    else resetGame();
 }
 
 function handleStopGame() {
@@ -414,8 +414,8 @@ function handlePopup(type){
     }
     else if (type === 3) {
         cancelBtn.style.display = 'inline-block';
-      popupContent.className = "popup-content"; // reset first
-popupContent.classList.add("popup-danger");
+        popupContent.className = "popup-content"; // reset first
+        popupContent.classList.add("popup-danger");
         const message = 'Are you sure you want to give up?\nTHIS WILL STOP TIMER AND REVEAL ALL LYRICS!!!!';
         popupContent.querySelector("p").textContent = message;
         popupContent.querySelector("h2").textContent = "Give Up?";
@@ -435,7 +435,7 @@ popupContent.classList.add("popup-danger");
     else if (type === 4) {
        cancelBtn.style.display = 'none';
        popupContent.className = "popup-content"; // reset first
-popupContent.classList.add("popup-time");
+       popupContent.classList.add("popup-time");
        const message = `
         ⏰ Time's Up! ⏰
         ${score}/${totalWords} words correct!
