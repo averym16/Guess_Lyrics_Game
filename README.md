@@ -110,13 +110,3 @@ Use the in-app feedback form or open a GitHub issue.
 📄 License
 
 MIT License
-
-💡 Why This Project Matters
-
-This project demonstrates:
-
-Full-stack development skills
-API design and integration
-Real-time input handling and validation
-Clean UI/UX thinking
-Ability to take a concept from idea → production-ready release
