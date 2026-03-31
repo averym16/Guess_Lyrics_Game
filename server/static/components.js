@@ -147,6 +147,9 @@ export function loadFooter() {
             <li><a href="https://www.linkedin.com/in/avery-morrison-32154b156/" target="_blank"><img src="../static/images/linkedin.svg"></a></li>
         </ul>
         </section>
+      
+            <p id="request"><a href="https://forms.gle/4mPUXe8P1cq63qZGA" target="_blank">Request a Song</a></p>
+     
         <section id="footer_misc">
         <ul id="footer_misc_list">
             <li>Last Updated: 03/25/2026</li>

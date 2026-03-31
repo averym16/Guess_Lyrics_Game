@@ -328,6 +328,35 @@ section {
     align-items: center;
     gap: 2rem;
 }
+.footer > * {
+    flex: 1;
+}
+
+#request {
+    display: flex;
+    justify-content: center;
+}
+
+#request{
+    background: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+    border-radius: 0;
+    font-size: 1.25rem;
+    color: var(--primary-color);
+    justify-self:left;
+}
+#request a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+}
+#request a:hover {
+    color: var(--text-primary);
+    text-decoration: underline;
+}
 
 #contact_info,
 #footer_misc {
