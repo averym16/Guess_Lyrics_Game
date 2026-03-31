@@ -19,17 +19,6 @@ app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
 db.init_app(app)
 migrate = Migrate(app, db)
 
-@app.get("/")
-def index():
-    return render_template("index.html")
-@app.get("/guess")  
-def guess_lyrics():
-    return render_template("lyric_game.html")
-
-@app.get("/instructions")
-def instructions():
-    return render_template("instructions.html")
-
 @app.get("/api/health")
 def health():
     return {'status': 'healthy'}, 200

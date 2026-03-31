@@ -3,7 +3,7 @@
 
 export async function getSong(artist, song) {
     try {
-        const response = await fetch('/api/get_song', {
+        const response = await fetch('https://orange-river-0c7bea10f.4.azurestaticapps.net/api/get_song', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -26,7 +26,7 @@ export async function getSong(artist, song) {
 
 export async function getRandomSong() {
     try {
-        const response = await fetch('/api/songs/random');
+        const response = await fetch('https://orange-river-0c7bea10f.4.azurestaticapps.net/api/songs/random');
         
         if (!response.ok) {
             throw new Error('Failed to fetch random song');
@@ -41,7 +41,7 @@ export async function getRandomSong() {
 
 export async function getSongLibrary() {
     try {
-        const response = await fetch('/api/library');
+        const response = await fetch('https://orange-river-0c7bea10f.4.azurestaticapps.net/api/library');
         
         if (!response.ok) {
             throw new Error('Failed to fetch songs');
@@ -55,7 +55,7 @@ export async function getSongLibrary() {
 
 export async function getArtists(){
     try {
-        const response = await fetch('/api/artist/get_artists');
+        const response = await fetch('https://orange-river-0c7bea10f.4.azurestaticapps.net/api/artist/get_artists');
         
         if (!response.ok) {
             throw new Error('Failed to fetch artists');
@@ -69,7 +69,7 @@ export async function getArtists(){
 
 export async function getSongs_ByArtist(artist){
      try {
-            const response = await fetch('/api/artist/get_songs', {
+            const response = await fetch('https://orange-river-0c7bea10f.4.azurestaticapps.net/api/artist/get_songs', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -92,7 +92,7 @@ export async function getSongs_ByArtist(artist){
 
 export async function getRandSong_ByArtist(artist){
     try {
-        const response = await fetch('/api/artist/get_random_song', {
+        const response = await fetch('https://orange-river-0c7bea10f.4.azurestaticapps.net/api/artist/get_random_song', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
