@@ -21,6 +21,10 @@ def index():
 def guess_lyrics():
     return render_template("lyric_game.html")
 
+@app.get("/instructions")
+def instructions():
+    return render_template("instructions.html")
+
 @app.get("/api/health")
 def health():
     return {'status': 'healthy'}, 200

@@ -130,6 +130,7 @@ export function loadNavbar() {
     const navbar = document.getElementById('navbar');
     navbar.innerHTML = `
         <a href="/">Guess The Lyrics</a>
+        <a href="/instructions" target="_blank">Instructions</a>
         <button id="themeToggle">Toggle Theme</button>
     `;
     
