@@ -4,12 +4,17 @@ from sqlalchemy import and_, func, select
 from flask_migrate import Migrate
 from dotenv import load_dotenv
 from models import db, Song, Artist
+from flask_cors import CORS
+CORS(app)
 
 load_dotenv()  # reads .env if present
 
 app = Flask(__name__, static_folder="static", static_url_path="/static")
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ["DATABASE_URL"]
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
+    "connect_args": {"sslmode": "require"}
+}
 
 db.init_app(app)
 migrate = Migrate(app, db)
@@ -150,4 +155,4 @@ def get_random_song_by_artist():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000)
