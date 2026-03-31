@@ -1,0 +1,164 @@
+/* ==================== PAGE LAYOUT ==================== */
+.instructions {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Section dividers */
+.instructions hr {
+    border: none;
+    height: 1px;
+    background: var(--border-color);
+    opacity: 0.5;
+}
+
+/* ==================== SECTION CARDS ==================== */
+.how_to_play,
+.game_mechanics {
+    background: var(--surface);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+}
+
+/* subtle hover like rest of app */
+.how_to_play:hover,
+.game_mechanics:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* ==================== HEADINGS ==================== */
+.instructions h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+/* gradient underline accent */
+.instructions h2::after {
+    content: "";
+    display: block;
+    width: 50px;
+    height: 3px;
+    margin-top: 0.5rem;
+    background: linear-gradient(
+        135deg,
+        var(--primary-color),
+        var(--secondary-color)
+    );
+    border-radius: 2px;
+}
+
+.instructions h3 {
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+/* ==================== LISTS ==================== */
+.instructions ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 1rem;
+}
+
+.instructions li {
+    position: relative;
+    padding: 0.6rem 0.75rem 0.6rem 2.25rem;
+    margin-bottom: 0.4rem;
+    border-radius: 0.5rem;
+    background: var(--surface);
+    border: 1px solid transparent;
+    transition: var(--transition);
+}
+
+/* arrow indicator (consistent with your app style) */
+.instructions li::before {
+    content: "→";
+    position: absolute;
+    left: 0.75rem;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+/* hover interaction */
+.instructions li:hover {
+    background: var(--surface-hover);
+    border-color: var(--primary-color);
+    transform: translateX(4px);
+}
+
+/* nested lists */
+.instructions ul ul {
+    margin-top: 0.4rem;
+}
+
+.instructions ul ul li {
+    background: transparent;
+    border: none;
+    padding-left: 2rem;
+    opacity: 0.9;
+}
+
+/* ==================== PARAGRAPHS ==================== */
+.instructions p {
+    background: rgba(99, 102, 241, 0.05);
+    border-left: 4px solid var(--primary-color);
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    color: var(--text-primary);
+}
+
+/* ==================== HERO TWEAK ==================== */
+.instructions_header {
+    text-align: center;
+}
+
+/* make header icons feel nicer */
+.header-image {
+    width: 70px;
+    height: 70px;
+    opacity: 0.85;
+    transition: var(--transition);
+}
+
+.header-image:hover {
+    transform: rotate(-10deg) scale(1.05);
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
+    .instructions {
+        padding: 1.5rem 1rem;
+    }
+
+    .how_to_play,
+    .game_mechanics {
+        padding: 1.5rem;
+    }
+
+    .instructions h2 {
+        font-size: 1.5rem;
+    }
+
+    .instructions h3 {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .instructions {
+        padding: 1rem;
+    }
+
+    .instructions li {
+        font-size: 0.95rem;
+    }
+}
