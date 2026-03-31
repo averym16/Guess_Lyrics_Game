@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width", initial-scale="1.0">
+        <link rel="stylesheet" href="/static/css/common.css">
+        <link rel="stylesheet" href="/static/css/instructions.css">
+        <title>Guess The Lyrics | Instructions</title>
+    </head>
+    <body>
+        <nav id ="navbar"></nav>
+        <main>
+            <header>
+                <div class="hero">
+                    <img src="/static/images/notes.svg" alt="notes" class="header-image">
+                    <h1 name="instructions_page" class="instructions_header" id="instructions_header">Instructions</h1>
+                    <img src="/static/images/notes.svg" alt="notes" class="header-image">
+                </div>
+            </header>
+            <section class="instructions">
+                
+                <div class="how_to_play">
+                <h2>How to Play</h2>
+                <h3> Start the Game </h3>
+                <ul>
+                    <li>Choose an artist and song, or select random.</li>
+                    <li>Click Start to begin.</li>
+                    <li>A timer will start automatically.</li>
+                </ul>
+                <h3>Make Guesses</h3>
+                <ul>
+                    <li>Type a word into the input box</li>
+                    <li>Your guess is checked as you type (no need to press enter).</li>
+                    <li>If correct:
+                        <ul>
+                            <li>All matching words in the lyrics are revealed.</li>
+                            <li>Your score increases.</li> 
+                        </ul>
+                    </li>
+                </ul>
+                <h3>What Counts as Correct</h3>
+                <ul>
+                    <li>Words are:</li>
+                    <ul>
+                        <li>Case-insensitive</li>
+                        <li>Punctuation is ignored (e.g., "don't" → "dont")</li>
+                        <li>You can also get credit for synonyms (if applicable in the system)</li>
+                    </ul>
+                </ul>
+                <h3>Winning the Game</h3>
+                <p>You win when you correctly guess all unique words. A win screen will show your final score and song info.</p>
+                <h3>Running Out of Time</h3>
+                <p>When time expires, the game ends automatically. All missing words are revealed in red and your final score is shown.</p>
+                <h3>Play Again</h3>
+                <p>After finishing, you can play another song or continue with the same artist.</p>
+
+                </div>
+                
+                <div class="game_mechanics">
+                <h2>Game Mechanics</h2>
+                <h3>Understand the Board</h3>
+                <ul>
+                    <li>The lyrics are hidden as blanks (______).</li>
+                    <li>Each blank represents a word in the song.</li>
+                    <li>Words are revealed as you guess them correctly.</li>
+                </ul>
+                <h3>Score System</h3>
+                <ul>    
+                    <li>Your score = number of unique words guessed</li>
+                    <li>Total score = total unique words in the song</li>
+                    <li>Displayed as: score / total</li>
+                </ul>
+                <h3>Timer & Controls</h3>
+                <ul>
+                    <li>Pause: Stops the timer and blurs lyrics</li>
+                    <li>Continue: Continue the game</li>
+                    <li>Stop: Ends the game immediately and reveals all lyrics</li>
+                    <li>Reset: Restart the game</li>
+                </ul>                
+                </div>
+                
+            </section>
+        </main>
+        <footer class="footer"></footer>
+    </body>
+    <script type="module" src="/static/game_logic.js"></script>
+</html>
