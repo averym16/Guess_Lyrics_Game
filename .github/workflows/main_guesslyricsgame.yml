@@ -72,5 +72,6 @@ jobs:
         id: deploy-to-webapp
         with:
           app-name: 'guesslyricsgame'
+          package: './server'
           slot-name: 'Production'
           
