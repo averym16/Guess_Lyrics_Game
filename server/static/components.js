@@ -143,9 +143,9 @@ export function loadFooter() {
     footer.innerHTML = `
        <section id="contact_info">
         <ul id="contact_list">
-            <li><a href="mailto:averymorrison26@gmail.com" target="_blank"><img src="../static/images/mail.svg"></a></li>
-            <li><a href="https://github.com/averym16" target="_blank"><img src="../static/images/github.svg"></a></li>
-            <li><a href="https://www.linkedin.com/in/avery-morrison-32154b156/" target="_blank"><img src="../static/images/linkedin.svg"></a></li>
+            <li><a href="mailto:averymorrison26@gmail.com" target="_blank"><img src="images/mail.svg"></a></li>
+            <li><a href="https://github.com/averym16" target="_blank"><img src="images/github.svg"></a></li>
+            <li><a href="https://www.linkedin.com/in/avery-morrison-32154b156/" target="_blank"><img src="images/linkedin.svg"></a></li>
         </ul>
         </section>
       

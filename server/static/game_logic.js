@@ -44,7 +44,7 @@ async function initGame() {
     
     // Load synonyms
     try {
-        const response = await fetch('static/synonyms.json');
+        const response = await fetch('synonyms.json');
         synonyms = await response.json();
     } catch (error) {
         console.error('Error loading synonyms:', error);
