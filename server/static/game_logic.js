@@ -38,6 +38,8 @@ let gameActive = false;
 
 // ==================== INITIALIZATION ====================
 async function initGame() {
+    // Initialize UI components 
+    initComponents();
 
     handlePopup(0); // Ensure popup is hidden on start
     artists = await getArtists();
@@ -51,11 +53,11 @@ async function initGame() {
         synonyms = [];
     }
     
-    // Initialize UI components 
-    initComponents();
+    
 
      if ( document.getElementById('home_header') !== null) return;
-    loadArtists(artists);
+    loadArtists(artists, currentArtist);
+    if (sameArtist) document.getElementBy
     // Set up event listeners
     const form = document.getElementById('selection');
     const guessInput = document.getElementById('gameinput');
@@ -317,7 +319,7 @@ function resetGame() {
     
     // Reset UI
     hideGameSection();
-    document.getElementById('artist').innerHTML =  sameArtist ? `<option value="${currentArtist}">${currentArtist}</option>` : '<option value="random">Random</option>';
+    document.getElementById('artist').innerHTML =  '<option value="random">Random</option>';
     document.getElementById('song').innerHTML =  '<option value="random">Random</option>';
     document.getElementById('gameinput').value = '';
     document.getElementById('lyrics-table').innerHTML='';
@@ -327,7 +329,7 @@ function resetGame() {
     }
 
     else {
-        loadArtists(artists);
+        loadArtists(artists, currentArtist);
     }
     resetTimer();
    

@@ -221,19 +221,21 @@ export function buildTable(lyrics) {
     lyricsContainer.appendChild(tbody);
 }
 
-export function loadArtists(artists){
+export function loadArtists(artists, currentArtist){
     const artist_list =  document.getElementById('artist');
     
     artists.forEach(item => {
         const option_artist = document.createElement('option');
         option_artist.textContent = item.artist;
+        option_artist.selected = (item.artist === currentArtist);
         artist_list.appendChild(option_artist);
     });
 }
 
 export function loadSongsByArtist(songs){
     const song_list = document.getElementById('song');
-   
+    song_list.innerHTML = ""; // Clear previous options
+
     songs.forEach(item => {
         const option_song = document.createElement('option');
         option_song.textContent = item.song;
