@@ -57,7 +57,6 @@ async function initGame() {
 
      if ( document.getElementById('home_header') !== null) return;
     loadArtists(artists, currentArtist);
-    if (sameArtist) document.getElementBy
     // Set up event listeners
     const form = document.getElementById('selection');
     const guessInput = document.getElementById('gameinput');
@@ -324,13 +323,16 @@ function resetGame() {
     document.getElementById('gameinput').value = '';
     document.getElementById('lyrics-table').innerHTML='';
     document.getElementById('header').innerText = 'Guess The Lyrics';
+    
+    loadArtists(artists, currentArtist);
+    
     if(sameArtist) {
         loadSongs();
     }
 
-    else {
-        loadArtists(artists, currentArtist);
-    }
+    
+   
+    
     resetTimer();
    
     
